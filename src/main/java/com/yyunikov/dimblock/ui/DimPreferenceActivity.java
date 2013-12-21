@@ -3,13 +3,15 @@ package com.yyunikov.dimblock.ui;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+
 import com.yyunikov.dimblock.R;
 
 /**
  * Author: yyunikov
  * Date: 12/19/13
  */
-public class DimPreferenceActivity extends ActionBarActivity {
+public class DimPreferenceActivity extends ActionBarActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,11 @@ public class DimPreferenceActivity extends ActionBarActivity {
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new DimPreferenceFragment()).commit();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     /**
