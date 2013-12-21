@@ -31,3 +31,6 @@ proguard/
 # Gradle files
 .gradle/
 build/
+
+# Temporary files
+*~
