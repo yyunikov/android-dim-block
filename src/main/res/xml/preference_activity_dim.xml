@@ -37,6 +37,7 @@
         android:title="@string/pref_header_other">
 
         <PreferenceScreen
+            android:key="@string/key_pref_display_settings"
             android:title="@string/pref_title_display_settings"
             android:summary="@string/pref_summary_display_settings">
 

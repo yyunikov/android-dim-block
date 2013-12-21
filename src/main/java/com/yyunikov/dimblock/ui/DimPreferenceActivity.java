@@ -1,17 +1,20 @@
 package com.yyunikov.dimblock.ui;
 
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 import com.yyunikov.dimblock.R;
+import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
  * Author: yyunikov
  * Date: 12/19/13
  */
-public class DimPreferenceActivity extends ActionBarActivity implements View.OnClickListener{
+public class DimPreferenceActivity extends ActionBarActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,20 +24,38 @@ public class DimPreferenceActivity extends ActionBarActivity implements View.OnC
                 new DimPreferenceFragment()).commit();
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
     /**
-     * This fragment shows the preferences for the first header.
+     * This fragment shows the preferences for dim block.
      */
-    public static class DimPreferenceFragment extends PreferenceFragment {
+    public static class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+
+        private DimPreferenceController dimPreferenceController;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_activity_dim);
+
+            initialize();
         }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            final String displaySettingsKey = getString(R.string.key_pref_display_settings);
+
+            if (preference.getKey().equals(displaySettingsKey)) {
+                dimPreferenceController.openDisplaySettings();;
+            }
+
+            return false;
+        }
+
+        private void initialize() {
+            dimPreferenceController = new DimPreferenceController(getActivity());
+
+            findPreference(getString(R.string.key_pref_display_settings)).setOnPreferenceClickListener(this);
+        }
+
     }
 }
