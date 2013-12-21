@@ -25,12 +25,12 @@
         android:title="@string/pref_header_notifications">
 
         <ListPreference
+            android:key="@string/key_pref_status_notifications"
             android:title="@string/pref_title_status_bar_notifications"
+            android:defaultValue="2"
             android:entries="@array/pref_status_bar_notifications_list"
             android:entryValues="@array/pref_status_bar_notifications_list_indexes"
-            android:dialogMessage="@string/pref_dialog_message_status_bar_notifications"
             android:dialogTitle="@string/pref_title_status_bar_notifications"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory

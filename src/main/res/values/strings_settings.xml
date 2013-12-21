@@ -16,7 +16,4 @@
     <string name="pref_summary_enabled">Enables dim block</string>
     <string name="pref_summary_display_settings">Opens device display settings</string>
 
-    <!-- Dialog messages -->
-    <string name="pref_dialog_message_status_bar_notifications">Please select when status bar notifications are enabled</string>
-
 </resources>
