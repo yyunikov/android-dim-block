@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_header_general">
+
+        <SwitchPreference
+            android:key="@string/key_pref_enabled"
+            android:title="@string/pref_title_enabled"
+            android:summary="@string/pref_summary_enabled" />
+
+        <CheckBoxPreference
+            android:key="@string/key_pref_enable_usb"
+            android:title="@string/pref_title_block_usb" />
+
+        <CheckBoxPreference
+            android:key="@string/key_pref_unblock_battery"
+            android:title="@string/pref_title_unblock_battery_low" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_notifications">
+
+        <ListPreference
+            android:title="@string/pref_title_status_bar_notifications"
+            android:entries="@array/pref_status_bar_notifications_list"
+            android:entryValues="@array/pref_status_bar_notifications_list_indexes"
+            android:dialogMessage="@string/pref_dialog_message_status_bar_notifications"
+            android:dialogTitle="@string/pref_title_status_bar_notifications"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_other">
+
+        <PreferenceScreen
+            android:title="@string/pref_title_display_settings"
+            android:summary="@string/pref_summary_display_settings">
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

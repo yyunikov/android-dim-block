@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Array of strings for status bar notifications list in preferences -->
+    <string-array name="pref_status_bar_notifications_list">
+        <item>Never</item>
+        <item>When blocked</item>
+        <item>Always</item>
+    </string-array>
+
+    <string-array name="pref_status_bar_notifications_list_indexes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>
