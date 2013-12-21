@@ -3,7 +3,7 @@
           package="com.yyunikov.dimblock">
     <uses-sdk android:minSdkVersion="11"/>
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/Theme.Base.AppCompat.Light">
-        <activity android:name=".ui.DimPreferenceActivity">
+        <activity android:name="com.yyunikov.dimblock.ui.DimPreferenceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
