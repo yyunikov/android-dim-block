@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import com.yyunikov.dimblock.R;
@@ -14,6 +15,8 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
  * Date: 12/19/13
  */
 public class DimPreferenceActivity extends ActionBarActivity{
+
+    private static final String LOG_TAG = "DimPreferenceActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,10 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
+            final String preferenceKey = preference.getKey();
             // if device display settings clicked
-            if (preference.getKey().equals(getString(R.string.key_pref_display_settings))) {
-                dimPreferenceController.openDisplaySettings();;
+            if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_display_settings))) {
+                dimPreferenceController.openDisplaySettings();
             }
 
             return true;
@@ -63,8 +67,9 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
+            final String preferenceKey = preference.getKey();
             // if dim enabled preference clicked
-            if (preference.getKey().equals(getString(R.string.key_pref_dim_block_enabled))) {
+            if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
                 dimPreferenceController.changeDimEnabled();
             }
 
@@ -77,8 +82,16 @@ public class DimPreferenceActivity extends ActionBarActivity{
         private void initialize() {
             dimPreferenceController = new DimPreferenceController(getActivity());
 
-            findPreference(getString(R.string.key_pref_display_settings)).setOnPreferenceClickListener(this);
-            findPreference(getString(R.string.key_pref_dim_block_enabled)).setOnPreferenceChangeListener(this);
+            final String displaySettingsKey = getString(R.string.key_pref_display_settings);
+            final String dimBlockEnabledKey = getString(R.string.key_pref_display_settings);
+
+            if (displaySettingsKey != null && dimBlockEnabledKey != null) {
+                findPreference(displaySettingsKey).setOnPreferenceClickListener(this);
+                findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
+            } else {
+                Log.e(LOG_TAG, "Error: No preference key specified.");
+            }
+
         }
     }
 }

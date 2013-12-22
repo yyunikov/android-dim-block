@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.yyunikov.dimblock.R;
 
@@ -34,19 +32,13 @@ public class DimPreferenceController {
      */
     private boolean isDimEnabled;
 
-    private PowerManager.WakeLock wakeLock;
-
     public DimPreferenceController(final Activity activity) {
         final SharedPreferences prefs = activity.getPreferences(Activity.MODE_PRIVATE);
 
         this.activityContext = activity;
         this.prefsEditor = prefs.edit();
 
-        if (prefs.getBoolean(activity.getString(R.string.key_pref_dim_block_enabled), false)) {
-            isDimEnabled = true;
-        } else {
-            isDimEnabled = false;
-        }
+        isDimEnabled = prefs.getBoolean(activity.getString(R.string.key_pref_dim_block_enabled), false);
         setDimEnabled(isDimEnabled);
     }
 
@@ -71,7 +63,7 @@ public class DimPreferenceController {
     /**
      * Sets dim enabled.
      *
-     * @param setEnabled
+     * @param setEnabled boolean value to set
      */
     private void setDimEnabled(final boolean setEnabled) {
         final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
