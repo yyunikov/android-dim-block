@@ -7,9 +7,9 @@
         android:title="@string/pref_header_general">
 
         <SwitchPreference
-            android:key="@string/key_pref_enabled"
-            android:title="@string/pref_title_enabled"
-            android:summary="@string/pref_summary_enabled" />
+            android:key="@string/key_pref_dim_block_enabled"
+            android:title="@string/pref_title_dim_block"
+            android:summary="@string/pref_summary_dim_block" />
 
         <CheckBoxPreference
             android:key="@string/key_pref_enable_usb"

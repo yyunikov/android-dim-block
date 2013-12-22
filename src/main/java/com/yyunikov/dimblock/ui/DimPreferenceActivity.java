@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 
@@ -24,11 +25,22 @@ public class DimPreferenceActivity extends ActionBarActivity{
                 new DimPreferenceFragment()).commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        final MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_dim_preference, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     /**
      * This fragment shows the preferences for dim block.
      */
-    public static class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+    public static class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
+        /**
+         * Dim preference controller object
+         */
         private DimPreferenceController dimPreferenceController;
 
         @Override
@@ -42,20 +54,32 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            final String displaySettingsKey = getString(R.string.key_pref_display_settings);
-
-            if (preference.getKey().equals(displaySettingsKey)) {
+            // if device display settings clicked
+            if (preference.getKey().equals(getString(R.string.key_pref_display_settings))) {
                 dimPreferenceController.openDisplaySettings();;
             }
 
-            return false;
+            return true;
         }
 
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object o) {
+            // if dim enabled preference clicked
+            if (preference.getKey().equals(getString(R.string.key_pref_dim_block_enabled))) {
+                dimPreferenceController.changeDimEnabled();
+            }
+
+            return true;
+        }
+
+        /**
+         * Initialization
+         */
         private void initialize() {
             dimPreferenceController = new DimPreferenceController(getActivity());
 
             findPreference(getString(R.string.key_pref_display_settings)).setOnPreferenceClickListener(this);
+            findPreference(getString(R.string.key_pref_dim_block_enabled)).setOnPreferenceChangeListener(this);
         }
-
     }
 }
