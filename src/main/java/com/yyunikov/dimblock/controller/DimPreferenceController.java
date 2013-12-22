@@ -1,12 +1,17 @@
 package com.yyunikov.dimblock.controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.PowerManager;
 import android.provider.Settings;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.yyunikov.dimblock.R;
+
+import main.java.com.yyunikov.dimblock.base.WakeLockManager;
 
 /**
  * Author: yyunikov
@@ -17,29 +22,32 @@ public class DimPreferenceController {
     /**
      * Context of passed activity
      */
-    private Activity activityContext;
+    private final Activity activityContext;
+
+    /**
+     * Editor for shared preferences
+     */
+    private final SharedPreferences.Editor prefsEditor;
 
     /**
      * Flag of dim is enabled
      */
     private boolean isDimEnabled;
 
-    /**
-     * Editor for shared preferences
-     */
-    private SharedPreferences.Editor prefsEditor;
+    private PowerManager.WakeLock wakeLock;
 
     public DimPreferenceController(final Activity activity) {
-        final SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+        final SharedPreferences prefs = activity.getPreferences(Activity.MODE_PRIVATE);
+
+        this.activityContext = activity;
+        this.prefsEditor = prefs.edit();
 
         if (prefs.getBoolean(activity.getString(R.string.key_pref_dim_block_enabled), false)) {
             isDimEnabled = true;
         } else {
             isDimEnabled = false;
         }
-
-        this.activityContext = activity;
-        this.prefsEditor = prefs.edit();
+        setDimEnabled(isDimEnabled);
     }
 
     /**
@@ -63,14 +71,20 @@ public class DimPreferenceController {
     /**
      * Sets dim enabled.
      *
-     * @param isEnabled
+     * @param setEnabled
      */
-    private void setDimEnabled(final boolean isEnabled) {
-        if (isEnabled) {
-            activityContext.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    private void setDimEnabled(final boolean setEnabled) {
+        final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
+
+        if (setEnabled) {
+            WakeLockManager.getInstance(pm).lock();
+            // this can be used for an activity window to be dim blocked
+            // activityContext.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             isDimEnabled = true;
         } else {
-            activityContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            WakeLockManager.getInstance(pm).unlock();
+            // this can be used for an activity window to be dim unblocked
+            //activityContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             isDimEnabled = false;
         }
         prefsEditor.putBoolean(activityContext.getString(R.string.key_pref_dim_block_enabled), isDimEnabled);

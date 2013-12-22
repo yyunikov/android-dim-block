@@ -6,7 +6,6 @@ import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 
