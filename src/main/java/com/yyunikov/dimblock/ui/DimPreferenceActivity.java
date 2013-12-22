@@ -83,7 +83,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
             dimPreferenceController = new DimPreferenceController(getActivity());
 
             final String displaySettingsKey = getString(R.string.key_pref_display_settings);
-            final String dimBlockEnabledKey = getString(R.string.key_pref_display_settings);
+            final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
 
             if (displaySettingsKey != null && dimBlockEnabledKey != null) {
                 findPreference(displaySettingsKey).setOnPreferenceClickListener(this);

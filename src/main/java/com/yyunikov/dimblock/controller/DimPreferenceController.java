@@ -28,7 +28,7 @@ public class DimPreferenceController {
     private final SharedPreferences.Editor prefsEditor;
 
     /**
-     * Flag of dim is enabled
+     * Flag showing dim is enabled
      */
     private boolean isDimEnabled;
 
