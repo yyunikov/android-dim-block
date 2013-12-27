@@ -9,13 +9,15 @@ import android.provider.Settings;
 
 import com.yyunikov.dimblock.R;
 
+import java.io.Serializable;
+
 import main.java.com.yyunikov.dimblock.base.WakeLockManager;
 
 /**
  * Author: yyunikov
  * Date: 12/19/13
  */
-public class DimPreferenceController {
+public class DimPreferenceController implements Serializable {
 
     /**
      * Context of passed activity
@@ -28,18 +30,21 @@ public class DimPreferenceController {
     private final SharedPreferences.Editor prefsEditor;
 
     /**
+     * Shared preferences
+     */
+    private final SharedPreferences prefs;
+
+    /**
      * Flag showing dim is enabled
      */
     private boolean isDimEnabled;
 
     public DimPreferenceController(final Activity activity) {
-        final SharedPreferences prefs = activity.getPreferences(Activity.MODE_PRIVATE);
-
+        this.prefs = activity.getPreferences(Activity.MODE_PRIVATE);
         this.activityContext = activity;
         this.prefsEditor = prefs.edit();
 
-        isDimEnabled = prefs.getBoolean(activity.getString(R.string.key_pref_dim_block_enabled), false);
-        setDimEnabled(isDimEnabled);
+        setDimEnabled(getDimEnabled());
     }
 
     /**
@@ -50,22 +55,11 @@ public class DimPreferenceController {
     }
 
     /**
-     * Changes dim enabled state depending on current value.
-     */
-    public void changeDimEnabled() {
-        if (getDimEnabled()) {
-            setDimEnabled(false);
-        } else {
-            setDimEnabled(true);
-        }
-    }
-
-    /**
      * Sets dim enabled.
      *
      * @param setEnabled boolean value to set
      */
-    private void setDimEnabled(final boolean setEnabled) {
+    public void setDimEnabled(final boolean setEnabled) {
         final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
 
         if (setEnabled) {
@@ -89,6 +83,6 @@ public class DimPreferenceController {
      * @return true if dim block is enabled, false otherwise
      */
     private boolean getDimEnabled() {
-        return isDimEnabled;
+        return prefs.getBoolean(activityContext.getString(R.string.key_pref_dim_block_enabled), false);
     }
 }

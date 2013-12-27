@@ -1,8 +1,10 @@
 package com.yyunikov.dimblock.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -68,9 +70,16 @@ public class DimPreferenceActivity extends ActionBarActivity{
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             final String preferenceKey = preference.getKey();
+
             // if dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
-                dimPreferenceController.changeDimEnabled();
+                // true if it was just switched off
+                final boolean switchedOff = ((SwitchPreference) preference).isChecked();
+                if (!switchedOff) {
+                    dimPreferenceController.setDimEnabled(true);
+                } else {
+                    dimPreferenceController.setDimEnabled(false);
+                }
             }
 
             return true;
