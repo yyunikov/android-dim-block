@@ -75,10 +75,10 @@ public class DimPreferenceActivity extends ActionBarActivity{
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
                 // true if it was just switched off
                 final boolean switchedOff = ((SwitchPreference) preference).isChecked();
-                if (!switchedOff) {
-                    dimPreferenceController.setDimEnabled(true);
-                } else {
+                if (switchedOff) {
                     dimPreferenceController.setDimEnabled(false);
+                } else {
+                    dimPreferenceController.setDimEnabled(true);
                 }
             }
 
