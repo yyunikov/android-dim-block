@@ -1,5 +1,6 @@
 package com.yyunikov.dimblock.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
+import com.yyunikov.dimblock.service.DimBlockService;
 
 /**
  * Author: yyunikov
@@ -101,8 +103,12 @@ public class DimPreferenceActivity extends ActionBarActivity{
             // true if it was just switched off
             final boolean switchedOff = ((SwitchPreference) preference).isChecked();
             if (!switchedOff) {
+                final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
+                startService(dimBlockIntent);
                 dimPreferenceController.setDimEnabled(true);
             } else {
+                final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
+                stopService(dimBlockIntent);
                 dimPreferenceController.setDimEnabled(false);
             }
         }
