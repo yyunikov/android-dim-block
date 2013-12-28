@@ -3,11 +3,8 @@ package com.yyunikov.dimblock.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.provider.Settings;
-
-import com.yyunikov.dimblock.R;
 
 import java.io.Serializable;
 
@@ -20,7 +17,7 @@ import main.java.com.yyunikov.dimblock.base.WakeLockManager;
 public class DimPreferenceController implements Serializable {
 
     /**
-     * Context of passed activity
+     * Context of passed activity.
      */
     private final Activity activityContext;
 
@@ -52,5 +49,13 @@ public class DimPreferenceController implements Serializable {
             // this can be used for an activity window to be dim unblocked
             //activityContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+    }
+
+    /**
+     * Checks if dim is blocked.
+     */
+    public boolean isDimBlocked() {
+        final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
+        return WakeLockManager.getInstance(pm).isLocked();
     }
 }

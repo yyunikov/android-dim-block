@@ -45,7 +45,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
     public class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
         /**
-         * Dim preference controller object
+         * Dim preference controller object.
          */
         private DimPreferenceController dimPreferenceController;
 
@@ -73,16 +73,16 @@ public class DimPreferenceActivity extends ActionBarActivity{
         public boolean onPreferenceChange(Preference preference, Object o) {
             final String preferenceKey = preference.getKey();
 
-            // if dim enabled preference clicked
+            // If dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
-                changeDimPreference(preference);
+                changeDimPreference((SwitchPreference) preference);
             }
 
             return true;
         }
 
         /**
-         * Initialization
+         * Fragment initialization.
          */
         private void initialize() {
             dimPreferenceController = new DimPreferenceController(getActivity());
@@ -90,18 +90,24 @@ public class DimPreferenceActivity extends ActionBarActivity{
             final String displaySettingsKey = getString(R.string.key_pref_display_settings);
             final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
 
-
             if (displaySettingsKey != null && dimBlockEnabledKey != null) {
                 findPreference(displaySettingsKey).setOnPreferenceClickListener(this);
                 findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
             } else {
                 Log.e(LOG_TAG, "Error: No preference key specified.");
             }
+
+            ensureDimOff();
         }
 
-        private void changeDimPreference(final Preference preference) {
+        /**
+         * Changes dim preference (on/off) and starts or stop dim block service.
+         *
+         * @param preference the dim preference
+         */
+        private void changeDimPreference(final SwitchPreference preference) {
             // true if it was just switched off
-            final boolean switchedOff = ((SwitchPreference) preference).isChecked();
+            final boolean switchedOff = preference.isChecked();
             if (!switchedOff) {
                 final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
                 startService(dimBlockIntent);
@@ -112,7 +118,15 @@ public class DimPreferenceActivity extends ActionBarActivity{
                 dimPreferenceController.setDimEnabled(false);
             }
         }
+
+        /**
+         * Checks if dim lock is held and sets preference off if not.
+         */
+        private void ensureDimOff() {
+            final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
+            if (!dimPreferenceController.isDimBlocked()) {
+                ((SwitchPreference) findPreference(dimBlockEnabledKey)).setChecked(false);
+            }
+        }
     }
-
-
 }
