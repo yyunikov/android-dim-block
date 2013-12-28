@@ -1,6 +1,5 @@
 package com.yyunikov.dimblock.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -29,6 +28,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
                 new DimPreferenceFragment()).commit();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final MenuInflater inflater = getMenuInflater();
@@ -40,7 +40,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
     /**
      * This fragment shows the preferences for dim block.
      */
-    public static class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+    public class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
         /**
          * Dim preference controller object
@@ -73,13 +73,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
             // if dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
-                // true if it was just switched off
-                final boolean switchedOff = ((SwitchPreference) preference).isChecked();
-                if (switchedOff) {
-                    dimPreferenceController.setDimEnabled(false);
-                } else {
-                    dimPreferenceController.setDimEnabled(true);
-                }
+                changeDimPreference(preference);
             }
 
             return true;
@@ -94,13 +88,25 @@ public class DimPreferenceActivity extends ActionBarActivity{
             final String displaySettingsKey = getString(R.string.key_pref_display_settings);
             final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
 
+
             if (displaySettingsKey != null && dimBlockEnabledKey != null) {
                 findPreference(displaySettingsKey).setOnPreferenceClickListener(this);
                 findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
             } else {
                 Log.e(LOG_TAG, "Error: No preference key specified.");
             }
+        }
 
+        private void changeDimPreference(final Preference preference) {
+            // true if it was just switched off
+            final boolean switchedOff = ((SwitchPreference) preference).isChecked();
+            if (!switchedOff) {
+                dimPreferenceController.setDimEnabled(true);
+            } else {
+                dimPreferenceController.setDimEnabled(false);
+            }
         }
     }
+
+
 }
