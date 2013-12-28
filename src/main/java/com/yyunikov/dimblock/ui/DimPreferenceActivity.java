@@ -42,7 +42,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
     /**
      * This fragment shows the preferences for dim block.
      */
-    public class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+    public static class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
         /**
          * Dim preference controller object.
@@ -110,11 +110,11 @@ public class DimPreferenceActivity extends ActionBarActivity{
             final boolean switchedOff = preference.isChecked();
             if (!switchedOff) {
                 final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
-                startService(dimBlockIntent);
+                getActivity().startService(dimBlockIntent);
                 dimPreferenceController.setDimEnabled(true);
             } else {
                 final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
-                stopService(dimBlockIntent);
+                getActivity().stopService(dimBlockIntent);
                 dimPreferenceController.setDimEnabled(false);
             }
         }
