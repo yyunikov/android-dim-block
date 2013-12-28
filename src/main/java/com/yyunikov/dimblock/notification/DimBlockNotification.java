@@ -23,13 +23,9 @@ public class DimBlockNotification {
      * @return notification instance
      */
     public static Notification getNotification(final Context context) {
-        final Intent intent = new Intent(context, DimPreferenceActivity.class);
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
         final Notification.Builder nBuilder = new Notification.Builder(context);
         final PendingIntent pendingIntent = PendingIntent.getActivity(context,0,
-                intent,0);
+                new Intent(context, DimPreferenceActivity.class),0);
 
         nBuilder.setContentIntent(pendingIntent);
         nBuilder.setContentTitle(context.getString(R.string.notification_text));
