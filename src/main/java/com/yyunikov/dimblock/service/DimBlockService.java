@@ -15,6 +15,7 @@ public class DimBlockService extends Service{
 
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
+        // TODO remove toast
         Toast.makeText(getApplicationContext(),"Start", Toast.LENGTH_SHORT).show();
         startForeground(DimBlockNotification.getId(),DimBlockNotification.getNotification(getApplicationContext()));
         return Service.START_STICKY;
@@ -27,6 +28,7 @@ public class DimBlockService extends Service{
 
     @Override
     public void onDestroy() {
+        // TODO remove toast
         Toast.makeText(getApplicationContext(),"Stop", Toast.LENGTH_SHORT).show();
         stopForeground(true);
         super.onDestroy();

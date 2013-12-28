@@ -15,15 +15,31 @@ public class WakeLockManager {
 
     private static PowerManager.WakeLock wakeLock;
 
+    /**
+     * Private constructor.
+     */
     private WakeLockManager() {
     }
 
+    /**
+     * Gets singleton instance of WakeLockManager.
+     *
+     * @param powerManager power manager object
+     * @return WakeLockManager instance
+     */
     public static synchronized WakeLockManager getInstance(final PowerManager powerManager) {
         if (instance == null) {
             instance = new WakeLockManager();
             wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "Dim Block");
         }
         return instance;
+    }
+
+    /**
+     * Checks if dim is locked.
+     */
+    public boolean isLocked(){
+        return wakeLock.isHeld();
     }
 
     /**
