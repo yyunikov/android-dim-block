@@ -5,7 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.view.animation.AnimationUtils;
+import com.yyunikov.dimblock.ui.DimPreferenceActivity;
 
 import com.yyunikov.dimblock.R;
 
@@ -16,24 +16,42 @@ import com.yyunikov.dimblock.R;
 public class DimBlockNotification {
     final private static int notifId = 812345;
 
-    public static Notification getNotification(Context context) {
+    /**
+     * Gets dim block status bar notification.
+     *
+     * @param context application context
+     * @return notification instance
+     */
+    public static Notification getNotification(final Context context) {
+        final Intent intent = new Intent(context, DimPreferenceActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
         final Notification.Builder nBuilder = new Notification.Builder(context);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(
-                context,
-                0,
-                new Intent(context, com.yyunikov.dimblock.ui.DimPreferenceActivity.class),
-                0);
-        nBuilder.addAction(R.drawable.icon,context.getString(R.string.notification_text),pendingIntent);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context,0,
+                intent,0);
+
+        nBuilder.setContentIntent(pendingIntent);
+        nBuilder.setContentTitle(context.getString(R.string.notification_text));
+        nBuilder.setContentText(context.getString(R.string.notification_action_text));
+        nBuilder.setSmallIcon(R.drawable.notification_icon);
 
         return nBuilder.build();
     }
 
+    /**
+     * Gets id of notification.
+     * @return notification id
+     */
     public static int getId() {
         return notifId;
     }
 
-    public static void cancel(Context context) {
+    /**
+     * Cancels dim block notification.
+     * @param context application context
+     */
+    public static void cancel(final Context context) {
         NotificationManager nm =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

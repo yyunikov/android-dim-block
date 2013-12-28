@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_text">Dim is blocked</string>
+
+    <string name="notification_action_text">Touch to unblock.</string>
+</resources>
