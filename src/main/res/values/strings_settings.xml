@@ -2,12 +2,10 @@
 <resources>
     <!-- Preferences headers -->
     <string name="pref_header_general">General</string>
-    <string name="pref_header_notifications">Notifications</string>
     <string name="pref_header_other">Other</string>
 
     <!-- Preferences content titles -->
     <string name="pref_title_dim_block">Dim Block</string>
-    <string name="pref_title_status_bar_notifications">Status bar notifications</string>
     <string name="pref_title_block_usb">Block on USB connected</string>
     <string name="pref_title_unblock_battery_low">Unblock if battery is low</string>
     <string name="pref_title_display_settings">Display settings</string>
