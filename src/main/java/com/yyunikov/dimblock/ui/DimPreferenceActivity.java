@@ -75,7 +75,7 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
             // If dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
-                changeDimPreference((SwitchPreference) preference);
+                changeDimPreference((SwitchPreference) preference, (Boolean) o);
             }
 
             return true;
@@ -105,18 +105,14 @@ public class DimPreferenceActivity extends ActionBarActivity{
          *
          * @param preference the dim preference
          */
-        private void changeDimPreference(final SwitchPreference preference) {
-            // true if it was just switched off
-            final boolean switchedOff = preference.isChecked();
-            if (!switchedOff) {
-                final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
+        private void changeDimPreference(final SwitchPreference preference, boolean isSwitchedOn) {
+            final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
+            if (isSwitchedOn) {
                 getActivity().startService(dimBlockIntent);
-                dimPreferenceController.setDimEnabled(true);
             } else {
-                final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
                 getActivity().stopService(dimBlockIntent);
-                dimPreferenceController.setDimEnabled(false);
             }
+            dimPreferenceController.setDimEnabled(isSwitchedOn);
         }
 
         /**
