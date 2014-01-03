@@ -11,12 +11,13 @@
             android:title="@string/pref_title_dim_block"
             android:summary="@string/pref_summary_dim_block" />
 
-        <CheckBoxPreference
+<!--        <CheckBoxPreference
             android:key="@string/key_pref_enable_usb"
-            android:title="@string/pref_title_block_usb" />
+            android:title="@string/pref_title_block_usb" />-->
 
         <CheckBoxPreference
             android:key="@string/key_pref_unblock_battery"
+            android:defaultValue="false"
             android:title="@string/pref_title_unblock_battery_low" />
 
     </PreferenceCategory>
