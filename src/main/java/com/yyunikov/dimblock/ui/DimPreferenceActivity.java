@@ -1,25 +1,25 @@
 package com.yyunikov.dimblock.ui;
 
-import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+
 import com.yyunikov.dimblock.R;
+import com.yyunikov.dimblock.base.Logger;
+import com.yyunikov.dimblock.broadcast.BatteryLevelReceiver;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
-import com.yyunikov.dimblock.service.DimBlockService;
 
 /**
  * Author: yyunikov
  * Date: 12/19/13
  */
 public class DimPreferenceActivity extends ActionBarActivity{
-
-    private static final String LOG_TAG = "DimPreferenceActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class DimPreferenceActivity extends ActionBarActivity{
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new DimPreferenceFragment()).commit();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -49,13 +48,22 @@ public class DimPreferenceActivity extends ActionBarActivity{
          */
         private DimPreferenceController dimPreferenceController;
 
+        private static final BatteryLevelReceiver batteryLevelReceiver = new BatteryLevelReceiver();
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_activity_dim);
+            PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_activity_dim, false);
 
             initialize();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            ensureDimOff();
         }
 
         @Override
@@ -78,6 +86,21 @@ public class DimPreferenceActivity extends ActionBarActivity{
                 changeDimPreference((SwitchPreference) preference, (Boolean) o);
             }
 
+            // If disable on battery low preference clicked
+            if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_unblock_battery))) {
+                if (o.equals(Boolean.TRUE)) {
+                    final IntentFilter filter = new IntentFilter();
+                    filter.addAction("android.intent.action.BATTERY_LOW");
+                    getActivity().registerReceiver(batteryLevelReceiver, filter);
+                } else {
+                    try {
+                        getActivity().unregisterReceiver(batteryLevelReceiver);
+                    } catch (final IllegalArgumentException e) { // If receiver is not registered yet
+                        Logger.debug("Receiver is not registered yet."); // TODO remove
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -89,15 +112,15 @@ public class DimPreferenceActivity extends ActionBarActivity{
 
             final String displaySettingsKey = getString(R.string.key_pref_display_settings);
             final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
+            final String unBlockOnBatteryLowKey = getString(R.string.key_pref_unblock_battery);
 
             if (displaySettingsKey != null && dimBlockEnabledKey != null) {
                 findPreference(displaySettingsKey).setOnPreferenceClickListener(this);
                 findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
+                findPreference(unBlockOnBatteryLowKey).setOnPreferenceChangeListener(this);
             } else {
-                Log.e(LOG_TAG, "Error: No preference key specified.");
+                Logger.error("Error: No preference key specified.");
             }
-
-            ensureDimOff();
         }
 
         /**
@@ -106,12 +129,6 @@ public class DimPreferenceActivity extends ActionBarActivity{
          * @param preference the dim preference
          */
         private void changeDimPreference(final SwitchPreference preference, boolean isSwitchedOn) {
-            final Intent dimBlockIntent = new Intent(getActivity(), DimBlockService.class);
-            if (isSwitchedOn) {
-                getActivity().startService(dimBlockIntent);
-            } else {
-                getActivity().stopService(dimBlockIntent);
-            }
             dimPreferenceController.setDimEnabled(isSwitchedOn);
         }
 
