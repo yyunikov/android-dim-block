@@ -1,10 +1,11 @@
 package com.yyunikov.dimblock.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.provider.Settings;
+import com.yyunikov.dimblock.service.DimBlockService;
 
 import java.io.Serializable;
 
@@ -19,17 +20,20 @@ public class DimPreferenceController implements Serializable {
     /**
      * Context of passed activity.
      */
-    private final Activity activityContext;
+    private final Context context;
 
-    public DimPreferenceController(final Activity activity) {
-        this.activityContext = activity;
+    private final SharedPreferences preferences;
+
+    public DimPreferenceController(final Context context) {
+        this.context = context;
+        this.preferences = context.getSharedPreferences("DimBlockPrefs", Context.MODE_PRIVATE);
     }
 
     /**
      * Opens device display settings.
      */
     public void openDisplaySettings() {
-        activityContext.startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+        context.startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
     }
 
     /**
@@ -38,16 +42,19 @@ public class DimPreferenceController implements Serializable {
      * @param setEnabled boolean value to set
      */
     public void setDimEnabled(final boolean setEnabled) {
-        final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
+        final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        final Intent dimBlockIntent = new Intent(context, DimBlockService.class);
 
         if (setEnabled) {
+            context.startService(dimBlockIntent);
             WakeLockManager.getInstance(pm).lock();
             // this can be used for an activity window to be dim blocked
-            // activityContext.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
+            context.stopService(dimBlockIntent);
             WakeLockManager.getInstance(pm).unlock();
             // this can be used for an activity window to be dim unblocked
-            //activityContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // context.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -55,7 +62,7 @@ public class DimPreferenceController implements Serializable {
      * Checks if dim is blocked.
      */
     public boolean isDimBlocked() {
-        final PowerManager pm = (PowerManager) activityContext.getSystemService(Context.POWER_SERVICE);
+        final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         return WakeLockManager.getInstance(pm).isLocked();
     }
 }

@@ -3,8 +3,9 @@ package com.yyunikov.dimblock.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.widget.Toast;
 import com.yyunikov.dimblock.notification.DimBlockNotification;
+
+import com.yyunikov.dimblock.base.Logger;
 
 /**
  * Author: yyunikov
@@ -15,6 +16,7 @@ public class DimBlockService extends Service{
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
         startForeground(DimBlockNotification.getId(),DimBlockNotification.getNotification(getApplicationContext()));
+        Logger.debug("Service started"); // TODO remove
         return Service.START_STICKY;
     }
 
@@ -26,6 +28,7 @@ public class DimBlockService extends Service{
     @Override
     public void onDestroy() {
         stopForeground(true);
+        Logger.debug("Service stoped"); // TODO remove
         super.onDestroy();
     }
 
