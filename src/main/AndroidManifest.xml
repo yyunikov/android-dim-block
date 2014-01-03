@@ -11,10 +11,14 @@
         <activity android:name=".ui.DimPreferenceActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.BATTERY_LOW"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <service android:name=".service.DimBlockService"/>
+        <receiver android:name=".broadcast.BatteryLevelReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

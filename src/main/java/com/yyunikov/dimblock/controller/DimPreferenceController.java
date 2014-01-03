@@ -22,6 +22,7 @@ public class DimPreferenceController implements Serializable {
      */
     private final Context context;
 
+    // TODO create simple shared preferences function for set/get
     private final SharedPreferences preferences;
 
     public DimPreferenceController(final Context context) {

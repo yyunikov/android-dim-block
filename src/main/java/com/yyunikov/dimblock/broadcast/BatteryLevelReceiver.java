@@ -18,7 +18,7 @@ public class BatteryLevelReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equalsIgnoreCase("android.intent.action.BATTERY_LOW")) {
             Logger.debug("Battery low received"); // TODO remove
-
+            // TODO only if preference is set to true
             (new DimPreferenceController(context)).setDimEnabled(false);
         }
     }

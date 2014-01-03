@@ -48,14 +48,11 @@ public class DimPreferenceActivity extends ActionBarActivity{
          */
         private DimPreferenceController dimPreferenceController;
 
-        private static final BatteryLevelReceiver batteryLevelReceiver = new BatteryLevelReceiver();
-
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preference_activity_dim);
-            PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_activity_dim, false);
 
             initialize();
         }
@@ -89,15 +86,9 @@ public class DimPreferenceActivity extends ActionBarActivity{
             // If disable on battery low preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_unblock_battery))) {
                 if (o.equals(Boolean.TRUE)) {
-                    final IntentFilter filter = new IntentFilter();
-                    filter.addAction("android.intent.action.BATTERY_LOW");
-                    getActivity().registerReceiver(batteryLevelReceiver, filter);
+                    // TODO write value in shared preference
                 } else {
-                    try {
-                        getActivity().unregisterReceiver(batteryLevelReceiver);
-                    } catch (final IllegalArgumentException e) { // If receiver is not registered yet
-                        Logger.debug("Receiver is not registered yet."); // TODO remove
-                    }
+                    // TODO write value in shared preference
                 }
             }
 

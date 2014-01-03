@@ -17,7 +17,6 @@
 
         <CheckBoxPreference
             android:key="@string/key_pref_unblock_battery"
-            android:defaultValue="false"
             android:title="@string/pref_title_unblock_battery_low" />
 
     </PreferenceCategory>
