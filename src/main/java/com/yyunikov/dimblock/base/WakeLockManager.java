@@ -1,4 +1,4 @@
-package main.java.com.yyunikov.dimblock.base;
+package com.yyunikov.dimblock.base;
 
 import android.os.PowerManager;
 

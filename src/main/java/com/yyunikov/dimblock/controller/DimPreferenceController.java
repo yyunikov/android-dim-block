@@ -5,17 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.provider.Settings;
+
+import com.yyunikov.dimblock.base.WakeLockManager;
 import com.yyunikov.dimblock.service.DimBlockService;
-
-import java.io.Serializable;
-
-import main.java.com.yyunikov.dimblock.base.WakeLockManager;
 
 /**
  * Author: yyunikov
  * Date: 12/19/13
  */
-public class DimPreferenceController implements Serializable {
+public class DimPreferenceController {
 
     /**
      * Context of passed activity.
