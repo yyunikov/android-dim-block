@@ -20,12 +20,35 @@ public class DimPreferenceController {
      */
     private final Context context;
 
-    // TODO create simple shared preferences function for set/get
     private final SharedPreferences preferences;
 
     public DimPreferenceController(final Context context) {
         this.context = context;
         this.preferences = context.getSharedPreferences("DimBlockPrefs", Context.MODE_PRIVATE);
+    }
+
+    /**
+     * Sets preference boolean value by key.
+     *
+     * @param key preference key
+     * @param value preference value
+     */
+    public void setBooleanPreference(final String key, final boolean value) {
+        final SharedPreferences.Editor prefsEdit = preferences.edit();
+
+        prefsEdit.putBoolean(key, value);
+
+        prefsEdit.commit();
+    }
+
+    /**
+     * Gets boolean preference by its key. Default returned value if key does not exists - false.
+     *
+     * @param key preference key
+     * @return preference value
+     */
+    public boolean getBooleanPreference(final String key) {
+        return preferences.getBoolean(key, false);
     }
 
     /**

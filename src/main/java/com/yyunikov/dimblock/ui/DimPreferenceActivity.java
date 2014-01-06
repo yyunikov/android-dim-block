@@ -1,10 +1,8 @@
 package com.yyunikov.dimblock.ui;
 
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,7 +10,6 @@ import android.view.MenuInflater;
 
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
-import com.yyunikov.dimblock.broadcast.BatteryLevelReceiver;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
@@ -86,9 +83,9 @@ public class DimPreferenceActivity extends ActionBarActivity{
             // If disable on battery low preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_unblock_battery))) {
                 if (o.equals(Boolean.TRUE)) {
-                    // TODO write value in shared preference
+                    dimPreferenceController.setBooleanPreference(preferenceKey, true);
                 } else {
-                    // TODO write value in shared preference
+                    dimPreferenceController.setBooleanPreference(preferenceKey, false);
                 }
             }
 

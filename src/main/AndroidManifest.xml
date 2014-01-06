@@ -15,7 +15,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.DimBlockService"/>
-        <receiver android:name=".broadcast.BatteryLevelReceiver">
+        <receiver android:name=".broadcast.BatteryLowReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LOW"/>
             </intent-filter>
