@@ -1,14 +1,16 @@
 package com.yyunikov.dimblock.ui;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ShareActionProvider;
 
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
@@ -18,7 +20,9 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
  * Author: yyunikov
  * Date: 12/19/13
  */
-public class DimPreferenceActivity extends ActionBarActivity{
+public class DimPreferenceActivity extends Activity {
+
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,19 @@ public class DimPreferenceActivity extends ActionBarActivity{
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_dim_preference, menu);
+        //inflater.inflate(R.menu.menu_dim_preference, menu);
+        inflater.inflate(R.menu.menu_share, menu);
 
-        return super.onCreateOptionsMenu(menu);
+        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.menu_item_share).getActionProvider();
+
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(getDefaultShareIntent());
+            mShareActionProvider.setShareHistoryFileName(null);
+        } else {
+            Logger.error("Can't find menu share item.");
+        }
+
+        return true;
     }
 
     @Override
@@ -46,6 +60,19 @@ public class DimPreferenceActivity extends ActionBarActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Gets the share intent.
+     *
+     * @return share intent
+     */
+    private Intent getDefaultShareIntent(){
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT");
+        intent.putExtra(Intent.EXTRA_TEXT,"Extra Text");
+        return intent;
     }
 
     /**
