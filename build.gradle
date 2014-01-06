@@ -11,8 +11,6 @@ apply plugin: 'android'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-    compile "com.android.support:support-v4:18.0.+"
-    compile "com.android.support:appcompat-v7:18.0.+"
 
     instrumentTestCompile files('libs/espresso-1.0-SNAPSHOT-bundled.jar')
 }
@@ -23,7 +21,7 @@ android {
 
     defaultConfig {
         versionCode 1
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 19
     }
 
