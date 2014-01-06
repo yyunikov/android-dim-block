@@ -1,4 +1,4 @@
 DimBlock
 ========
 
-Android application that easily block's dim in devices.
+Android application that easily block's dim on devices screens.
