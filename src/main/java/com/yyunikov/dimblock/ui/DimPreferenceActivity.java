@@ -1,5 +1,6 @@
 package com.yyunikov.dimblock.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -7,6 +8,7 @@ import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
@@ -33,6 +35,17 @@ public class DimPreferenceActivity extends ActionBarActivity{
         inflater.inflate(R.menu.menu_dim_preference, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId() == R.id.menu_about) {
+            final Dialog about = new AboutDialog(this);
+
+            about.show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
