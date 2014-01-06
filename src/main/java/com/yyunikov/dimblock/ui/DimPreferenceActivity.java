@@ -36,14 +36,12 @@ public class DimPreferenceActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.menu_dim_preference, menu);
-        inflater.inflate(R.menu.menu_share, menu);
+        inflater.inflate(R.menu.menu_dim_preference, menu);
 
         mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.menu_item_share).getActionProvider();
 
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(getDefaultShareIntent());
-            mShareActionProvider.setShareHistoryFileName(null);
         } else {
             Logger.error("Can't find menu share item.");
         }
@@ -70,8 +68,14 @@ public class DimPreferenceActivity extends Activity {
     private Intent getDefaultShareIntent(){
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT");
-        intent.putExtra(Intent.EXTRA_TEXT,"Extra Text");
+        //TODO figure out how to attach an image
+/*        intent.setType("image*//*");
+
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.icon);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);*/
+
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
         return intent;
     }
 
