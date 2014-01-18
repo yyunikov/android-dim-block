@@ -10,4 +10,6 @@
 
     <string name="share_text">Download the Dim Block application at https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
 
+    <string name="widget_title">Dim Block</string>
+
 </resources>

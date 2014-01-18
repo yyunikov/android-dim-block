@@ -5,4 +5,8 @@
     <dimen name="view_padding">4dp</dimen>
 
     <dimen name="layout_padding">8dp</dimen>
+
+    <dimen name="appwidget_min_width">84dp</dimen>
+
+    <dimen name="appwidget_min_height">40dp</dimen>
 </resources>
