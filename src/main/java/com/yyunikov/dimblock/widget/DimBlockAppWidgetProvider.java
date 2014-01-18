@@ -87,6 +87,7 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
         }
 
         views.setImageViewResource(R.id.img_dim_block, R.drawable.notification_icon);
+        views.setImageViewResource(R.id.img_settings, R.drawable.ic_action_settings);
 
         return views;
     }
