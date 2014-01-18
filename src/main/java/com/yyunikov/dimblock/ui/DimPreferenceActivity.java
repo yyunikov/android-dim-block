@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -105,7 +104,7 @@ public class DimPreferenceActivity extends Activity {
             final String preferenceKey = preference.getKey();
             // if device display settings clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_display_settings))) {
-                dimPreferenceController.openDisplaySettings(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+                dimPreferenceController.openDisplaySettings();
             }
 
             return true;

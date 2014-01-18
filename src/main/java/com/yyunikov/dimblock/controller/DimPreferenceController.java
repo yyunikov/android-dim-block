@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
+import android.provider.Settings;
 
 import com.yyunikov.dimblock.base.WakeLockManager;
 import com.yyunikov.dimblock.service.DimBlockService;
@@ -52,11 +53,12 @@ public class DimPreferenceController {
 
     /**
      * Opens device display settings.
-     *
-     * @param intent intent to run display settings
      */
-    public void openDisplaySettings(final Intent intent) {
-        context.startActivity(intent);
+    public void openDisplaySettings() {
+        final Intent openSettingsIntent = new Intent();
+        openSettingsIntent.setAction(Settings.ACTION_DISPLAY_SETTINGS);
+        openSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(openSettingsIntent);
     }
 
     /**

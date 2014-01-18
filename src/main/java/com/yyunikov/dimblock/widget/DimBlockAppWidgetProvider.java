@@ -10,7 +10,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 import android.widget.RemoteViews;
 
 import com.yyunikov.dimblock.R;
@@ -67,10 +66,8 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
         }
         if (intent.getAction().equals(ACTION_SETTINGS_OPEN)) {
             final DimPreferenceController controller = new DimPreferenceController(context);
-            final Intent openSettingsIntent = new Intent();
-            openSettingsIntent.setAction(Settings.ACTION_DISPLAY_SETTINGS);
-            openSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            controller.openDisplaySettings(openSettingsIntent);
+
+            controller.openDisplaySettings();
         }
     }
 
@@ -79,6 +76,7 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
      */
     private static RemoteViews buildUpdate(Context context) {
         final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
+
         views.setOnClickPendingIntent(R.id.btn_dim_block, getLaunchPendingIntent(context, R.id.btn_dim_block));
         views.setOnClickPendingIntent(R.id.btn_settings, getLaunchPendingIntent(context, R.id.btn_settings));
 
@@ -88,7 +86,8 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
         }
 
-        updateButtons(views, context);
+        views.setImageViewResource(R.id.img_dim_block, R.drawable.notification_icon);
+
         return views;
     }
 
@@ -138,15 +137,5 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
         // Update specific list of appWidgetIds if given, otherwise default to all
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(THIS_APPWIDGET, views);
-    }
-
-    /**
-     * Updates the buttons based on the underlying states of wifi, etc.
-     *
-     * @param views   The RemoteViews to update.
-     * @param context
-     */
-    private static void updateButtons(RemoteViews views, Context context) {
-        views.setImageViewResource(R.id.img_dim_block, R.drawable.notification_icon);
     }
 }
