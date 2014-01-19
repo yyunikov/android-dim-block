@@ -19,6 +19,7 @@ import android.widget.ShareActionProvider;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
+import com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider;
 
 /**
  * Author: yyunikov
@@ -121,6 +122,7 @@ public class DimPreferenceActivity extends Activity {
             // If dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
                 changeDimPreference((Boolean) o);
+                DimBlockAppWidgetProvider.updateWidget(getActivity(), (Boolean) o, dimPreferenceController);
             }
 
             // If disable on battery low preference clicked

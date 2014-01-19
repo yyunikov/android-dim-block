@@ -23,9 +23,6 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
             new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider");
 
-    // This widget keeps track of two states:
-    private static final int STATE_DISABLED = 0;
-    private static final int STATE_ENABLED = 1;
     private static final String ACTION_STATE_CHANGE = "com.yyunikov.dimblock.DimBlockStateChange";
     private static final String ACTION_SETTINGS_OPEN = "com.yyunikov.dimblock.DimBlockSettingsOpen";
 
@@ -45,7 +42,9 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         // Update each requested appWidgetId
-        final RemoteViews view = buildUpdate(context);
+        final DimPreferenceController controller = new DimPreferenceController(context);
+
+        final RemoteViews view = buildUpdate(context, getActualState(controller), controller);
 
         for (final int appWidgetId : appWidgetIds) {
             appWidgetManager.updateAppWidget(appWidgetId, view);
@@ -61,28 +60,32 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        final DimPreferenceController controller = new DimPreferenceController(context);
         if (intent.getAction().equals(ACTION_STATE_CHANGE)) {
-            updateWidget(context);
+            final boolean state = getActualState(controller);
+            updateWidget(context, !state, controller);
         }
         if (intent.getAction().equals(ACTION_SETTINGS_OPEN)) {
-            new DimPreferenceController(context).openDisplaySettings();
+            controller.openDisplaySettings();
         }
     }
 
     /**
      * Load image for given widget and build {@link RemoteViews} for it.
+     *
+     * @param context context
+     * @param state state of dim block
      */
-    private static RemoteViews buildUpdate(Context context) {
+    private static RemoteViews buildUpdate(final Context context, final boolean state, final DimPreferenceController controller) {
         final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-        final DimPreferenceController controller = new DimPreferenceController(context);
 
         views.setOnClickPendingIntent(R.id.btn_dim_block, getLaunchPendingIntent(context, R.id.btn_dim_block));
         views.setOnClickPendingIntent(R.id.btn_settings, getLaunchPendingIntent(context, R.id.btn_settings));
 
-        if (getActualState(controller) == STATE_DISABLED) {
+        if (state) {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
             controller.setDimEnabled(true);
-        } else if (getActualState(controller) == STATE_ENABLED) {
+        } else if (!state) {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_OFF[0]);
             controller.setDimEnabled(false);
         }
@@ -94,12 +97,12 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * TODO write this method
+     * Gets actual state of dim block.
      *
      * @return gets the actual state of the widget
      */
-    private static int getActualState(final DimPreferenceController controller) {
-        return controller.isDimBlocked() ? STATE_ENABLED : STATE_DISABLED;
+    private static boolean getActualState(final DimPreferenceController controller) {
+        return controller.isDimBlocked();
     }
 
     /**
@@ -133,8 +136,8 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
      *
      * @param context
      */
-    private static void updateWidget(Context context) {
-        final RemoteViews views = buildUpdate(context);
+    public static void updateWidget(final Context context, final boolean state, final DimPreferenceController controller) {
+        final RemoteViews views = buildUpdate(context, state ,controller);
 
         // Update specific list of appWidgetIds if given, otherwise default to all
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
