@@ -6,7 +6,7 @@
 
     <dimen name="layout_padding">8dp</dimen>
 
-    <dimen name="appwidget_min_width">84dp</dimen>
+    <dimen name="appwidget_min_width">72dp</dimen>
 
-    <dimen name="appwidget_min_height">40dp</dimen>
+    <dimen name="appwidget_min_height">32dp</dimen>
 </resources>
