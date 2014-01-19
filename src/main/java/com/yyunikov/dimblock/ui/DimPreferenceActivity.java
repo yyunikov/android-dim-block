@@ -120,7 +120,7 @@ public class DimPreferenceActivity extends Activity {
 
             // If dim enabled preference clicked
             if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
-                changeDimPreference((SwitchPreference) preference, (Boolean) o);
+                changeDimPreference((Boolean) o);
             }
 
             // If disable on battery low preference clicked
@@ -157,9 +157,9 @@ public class DimPreferenceActivity extends Activity {
         /**
          * Changes dim preference (on/off) and starts or stop dim block service.
          *
-         * @param preference the dim preference
+         * @param isSwitchedOn change dim preference depending on its current state
          */
-        private void changeDimPreference(final SwitchPreference preference, boolean isSwitchedOn) {
+        private void changeDimPreference(boolean isSwitchedOn) {
             dimPreferenceController.setDimEnabled(isSwitchedOn);
         }
 
@@ -170,6 +170,8 @@ public class DimPreferenceActivity extends Activity {
             final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
             if (!dimPreferenceController.isDimBlocked()) {
                 ((SwitchPreference) findPreference(dimBlockEnabledKey)).setChecked(false);
+            } else {
+                ((SwitchPreference) findPreference(dimBlockEnabledKey)).setChecked(true);
             }
         }
     }
