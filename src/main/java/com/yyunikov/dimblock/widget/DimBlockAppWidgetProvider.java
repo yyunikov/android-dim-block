@@ -21,7 +21,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
  */
 public class DimBlockAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
-            new ComponentName("com.yyunikov.dimblock",".widget.DimBlockAppWidgetProvider");
+            new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider");
 
     // This widget keeps track of two states:
     private static final int STATE_DISABLED = 0;
@@ -65,9 +65,7 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
             updateWidget(context);
         }
         if (intent.getAction().equals(ACTION_SETTINGS_OPEN)) {
-            final DimPreferenceController controller = new DimPreferenceController(context);
-
-            controller.openDisplaySettings();
+            new DimPreferenceController(context).openDisplaySettings();
         }
     }
 
@@ -76,14 +74,17 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
      */
     private static RemoteViews buildUpdate(Context context) {
         final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
+        final DimPreferenceController controller = new DimPreferenceController(context);
 
         views.setOnClickPendingIntent(R.id.btn_dim_block, getLaunchPendingIntent(context, R.id.btn_dim_block));
         views.setOnClickPendingIntent(R.id.btn_settings, getLaunchPendingIntent(context, R.id.btn_settings));
 
-        if (getActualState() == STATE_DISABLED) {
-            views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_OFF[0]);
-        } else if (getActualState() == STATE_ENABLED) {
+        if (getActualState(controller) == STATE_DISABLED) {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
+            controller.setDimEnabled(true);
+        } else if (getActualState(controller) == STATE_ENABLED) {
+            views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_OFF[0]);
+            controller.setDimEnabled(false);
         }
 
         views.setImageViewResource(R.id.img_dim_block, R.drawable.notification_icon);
@@ -97,8 +98,8 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
      *
      * @return gets the actual state of the widget
      */
-    private static int getActualState() {
-        return STATE_DISABLED;
+    private static int getActualState(final DimPreferenceController controller) {
+        return controller.isDimBlocked() ? STATE_ENABLED : STATE_DISABLED;
     }
 
     /**
