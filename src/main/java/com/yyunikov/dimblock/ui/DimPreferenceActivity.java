@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014 Yuriy Yunikov
+ */
+
 package com.yyunikov.dimblock.ui;
 
 import android.app.Activity;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014 Yuriy Yunikov
+ */
+
 package com.yyunikov.dimblock.base;
 
 import android.util.Log;

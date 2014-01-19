@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014 Yuriy Yunikov
+ */
+
 package com.yyunikov.dimblock.controller;
 
 import android.content.Context;
