@@ -11,8 +11,7 @@ apply plugin: 'android'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-
-    instrumentTestCompile files('libs/espresso-1.0-SNAPSHOT-bundled.jar')
+    compile 'com.google.android.gms:play-services:4.1.32'
 }
 
 android {
@@ -29,9 +28,7 @@ android {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
             java.srcDirs = ['src/main/java']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
+            resources.srcDirs = ['src/main/res']
             res.srcDirs = ['src/main/res','(library-res-path)']
             assets.srcDirs = ['src/main/assets','(library-res-path)']
         }

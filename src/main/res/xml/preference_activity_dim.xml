@@ -33,4 +33,6 @@
 
     </PreferenceCategory>
 
+    <com.yyunikov.dimblock.ui.AdPreference android:layout="@layout/ad_layout"/>
+
 </PreferenceScreen>
