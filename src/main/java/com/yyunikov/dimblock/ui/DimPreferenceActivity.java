@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
@@ -32,8 +34,12 @@ public class DimPreferenceActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dimblock);
 
-        // Display the fragment as the main content.
+        // These parts is needed to show ad in bottom of activity
+        //loadAd();
+        // getFragmentManager().beginTransaction().replace(R.id.fragment,
+        //        new DimPreferenceFragment()).commit();
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new DimPreferenceFragment()).commit();
     }
@@ -77,6 +83,17 @@ public class DimPreferenceActivity extends Activity {
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
         return intent;
+    }
+
+    /**
+     * Loads ad's from Admob
+     */
+    private void loadAd() {
+        final AdView adView = (AdView) findViewById(R.id.adView);
+        final AdRequest request = new AdRequest.Builder().
+                addTestDevice(AdRequest.DEVICE_ID_EMULATOR).
+                build();
+        adView.loadAd(request);
     }
 
     /**

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This activity is not used yet. Uncomment necessary parts in DimPreferenceActivity to make it available.
+ This can be used to display ads in the bottom of activity -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/relative_layout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" >
+
+        <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/adView"/>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-7711340491385512/5513673383"
+            android:gravity="bottom" />
+</RelativeLayout>
