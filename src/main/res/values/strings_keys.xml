@@ -6,5 +6,6 @@
     <string name="key_pref_enable_usb">enable_on_usb</string>
     <string name="key_pref_unblock_battery">unblock_on_low_battery</string>
     <string name="key_pref_display_settings">display_settings</string>
+    <string name="key_pref_ad_pref">ad_preference</string>
 
 </resources>

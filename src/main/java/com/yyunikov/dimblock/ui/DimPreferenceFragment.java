@@ -34,7 +34,6 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_activity_dim);
-
         initialize();
     }
 
@@ -42,6 +41,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
     public void onResume() {
         super.onResume();
         ensureDimOff();
+        displayAdOnNetworkConnected();
     }
 
     @Override
@@ -95,12 +95,36 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         final String dimBlockEnabledKey = getString(R.string.key_pref_dim_block_enabled);
         final String unBlockOnBatteryLowKey = getString(R.string.key_pref_unblock_battery);
 
-        if (displaySettingsKey != null && dimBlockEnabledKey != null) {
+        if (displaySettingsKey != null && dimBlockEnabledKey != null && unBlockOnBatteryLowKey != null) {
             findPreference(displaySettingsKey).setOnPreferenceClickListener(this);
             findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
             findPreference(unBlockOnBatteryLowKey).setOnPreferenceChangeListener(this);
         } else {
             Logger.error("Error: No preference key specified.");
+        }
+    }
+
+    /**
+     * Hides or shows ad preference on network connected or disconnected.
+     */
+    private void displayAdOnNetworkConnected(){
+        final String preferenceKey = getString(R.string.key_pref_ad_pref);
+
+        if (preferenceKey == null) {
+            Logger.error("Error: No ad preference key specified.");
+            return;
+        }
+
+        if (!dimPreferenceController.isNetworkConnected() && getPreferenceScreen().findPreference(preferenceKey) != null) {
+            getPreferenceScreen().removePreference(findPreference(preferenceKey));
+        } else if (dimPreferenceController.isNetworkConnected() && getPreferenceScreen().findPreference(preferenceKey) == null) {
+            // adding ad preference to preference screen
+            final AdPreference adPreference = new AdPreference(getActivity());
+            adPreference.setLayoutResource(R.layout.ad_layout);
+            adPreference.setKey(preferenceKey);
+            getPreferenceScreen().addPreference(adPreference);
+        } else {
+            // TODO unexpected exception. send it to google analytics
         }
     }
 

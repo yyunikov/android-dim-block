@@ -7,6 +7,7 @@ package com.yyunikov.dimblock.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.PowerManager;
 import android.provider.Settings;
 
@@ -93,5 +94,15 @@ public class DimPreferenceController {
     public boolean isDimBlocked() {
         final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         return WakeLockManager.getInstance(pm).isLocked();
+    }
+
+    /**
+     * Checks if device is connected to WiFi network.
+     *
+     * @return true if connected, false otherwise.
+     */
+    public boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return (cm.getActiveNetworkInfo() != null);
     }
 }
