@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014 Yuriy Yunikov
+  -->
+
+<resources>
+    <!-- Preferences headers -->
+    <string name="pref_header_general">Загальне</string>
+    <string name="pref_header_other">Інше</string>
+
+    <!-- Preferences content titles -->
+    <string name="pref_title_dim_block">Блокування Затемнення</string>
+    <string name="pref_title_block_usb">Блокувати при підключенні USB</string>
+    <string name="pref_title_unblock_battery_low">Розблокувати при низькому заряді батареї</string>
+    <string name="pref_title_display_settings">Налаштування екрану</string>
+
+    <!-- Preferences content summary -->
+    <string name="pref_summary_dim_block">Включає блокування затемнення</string>
+    <string name="pref_summary_display_settings">Відкриває налаштування екрану пристрою</string>
+
+</resources>

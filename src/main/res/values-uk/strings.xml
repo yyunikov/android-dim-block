@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014 Yuriy Yunikov
+  -->
+
+<resources>
+    <string name="app_name">Блокування Затемнення</string>
+
+    <string name="menu_about">Про програму</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="menu_share">Поділитись</string>
+
+    <string name="share_text">Скачуйте програму Блокування Затемнення на https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
+
+    <string name="widget_title">Блокування Затемнення</string>
+
+</resources>

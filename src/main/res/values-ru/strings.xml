@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014 Yuriy Yunikov
+  -->
+
+<resources>
+    <string name="app_name">Блокировка Потемнения</string>
+
+    <string name="menu_about">О программе</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="menu_share">Поделиться</string>
+
+    <string name="share_text">Скачивайте программу Блокировка Потемнения на https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
+
+    <string name="widget_title">Блокировка Потемнения</string>
+
+</resources>

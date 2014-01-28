@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014 Yuriy Yunikov
+  -->
+
+<resources>
+    <string name="notification_text">Затемнення екрану заблоковано</string>
+
+    <string name="notification_action_text">Натисніть для розблокування.</string>
+</resources>

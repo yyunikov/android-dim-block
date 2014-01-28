@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2014 Yuriy Yunikov
+  -->
+
+<resources>
+    <string name="about_title">Про програму</string>
+    <string name="about_version">Версія 1.0.0</string>
+    <string name="about_author">© 2014 Юрій Юніков</string>
+    <string name="about_icon_author">Автор іконки Udana Ekanayake (www.ekanayake.me). Змін не було внесено.</string>
+</resources>
