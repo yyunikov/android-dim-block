@@ -71,13 +71,13 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
                 dimPreferenceController.setBooleanPreference(preferenceKey, true);
                 // send zero value if unblock if battery is low gets checked
                 DimBlockApplication.getGaTracker().send(MapBuilder
-                        .createEvent("UX", "check", "Unblock if battery is low", new Long(1))
+                        .createEvent("UX", "Unblock if battery is low checked", "Unblock if battery is low", null)
                         .build());
             } else {
                 dimPreferenceController.setBooleanPreference(preferenceKey, false);
                 // send zero value if unblock if battery is low gets unchecked
                 DimBlockApplication.getGaTracker().send(MapBuilder
-                        .createEvent("UX", "check", "Unblock if battery is low", new Long(0))
+                        .createEvent("UX", "Unblock if battery is low unchecked", "Unblock if battery is low", null)
                         .build());
             }
         }
