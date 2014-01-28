@@ -18,7 +18,6 @@ public class DimBlockApplication extends Application {
     private static final String GA_TRACKING_ID = "UA-41878921-2";
 
     // Prevent hits from being sent to reports, i.e. during testing.
-    // TODO remove
     private static final boolean GA_IS_DRY_RUN = false;
 
     private static GoogleAnalytics mGa;
@@ -32,8 +31,7 @@ public class DimBlockApplication extends Application {
         mTracker = mGa.getTracker(GA_TRACKING_ID);
 
         mGa.setDryRun(GA_IS_DRY_RUN);
-        // TODO remove
-        mGa.getLogger().setLogLevel(com.google.analytics.tracking.android.Logger.LogLevel.VERBOSE);
+        //mGa.getLogger().setLogLevel(com.google.analytics.tracking.android.Logger.LogLevel.VERBOSE);
     }
 
     /*
