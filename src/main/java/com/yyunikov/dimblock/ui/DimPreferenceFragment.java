@@ -100,7 +100,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
             findPreference(unBlockOnBatteryLowKey).setOnPreferenceChangeListener(this);
         } else {
-            Logger.error("Error: No preference key specified.");
+            Logger.error("Error: No preference key specified.", getActivity());
         }
     }
 
@@ -111,7 +111,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         final String preferenceKey = getString(R.string.key_pref_ad_pref);
 
         if (preferenceKey == null) {
-            Logger.error("Error: No ad preference key specified.");
+            Logger.error("Error: No ad preference key specified.", getActivity());
             return;
         }
 
@@ -124,7 +124,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             adPreference.setKey(preferenceKey);
             getPreferenceScreen().addPreference(adPreference);
         } else {
-            // TODO unexpected exception. send it to google analytics
+            Logger.error("Unexpected exception with removing/adding ad.", getActivity());
         }
     }
 

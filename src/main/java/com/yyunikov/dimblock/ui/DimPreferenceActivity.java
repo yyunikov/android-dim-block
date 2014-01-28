@@ -47,7 +47,7 @@ public class DimPreferenceActivity extends Activity {
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(getDefaultShareIntent());
         } else {
-            Logger.error("Can't find menu share item.");
+            Logger.error("Can't find menu share item.", this);
         }
 
         return true;

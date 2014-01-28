@@ -4,7 +4,10 @@
 
 package com.yyunikov.dimblock.base;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.google.analytics.tracking.android.MapBuilder;
 
 /**
  * Author: yyunikov
@@ -19,6 +22,14 @@ public class Logger {
     }
 
     public static void error(final String text) {
+        error(text, null);
+    }
+
+    public static void error(final String text, final Context context) {
         Log.e(LOG_TAG, text);
+
+        if (context != null) {
+            DimBlockApplication.getGaTracker().send(MapBuilder.createException(text, false).build());
+        }
     }
 }

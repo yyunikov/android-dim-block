@@ -126,7 +126,6 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
                 break;
         }
 
-        // TODO what is pending intent?
         final PendingIntent pi = PendingIntent.getBroadcast(context, 0 /* no requestCode */,
                 launchIntent, 0 /* no flags */);
         return pi;
