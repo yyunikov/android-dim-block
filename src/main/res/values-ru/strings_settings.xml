@@ -9,13 +9,13 @@
     <string name="pref_header_other">Другое</string>
 
     <!-- Preferences content titles -->
-    <string name="pref_title_dim_block">Блокировка Потемнения</string>
+    <string name="pref_title_dim_block">Блокировка Затемнения</string>
     <string name="pref_title_block_usb">Блокировать при подключении USB</string>
     <string name="pref_title_unblock_battery_low">Разблокировать при низком заряде батареи</string>
     <string name="pref_title_display_settings">Настройки экрана</string>
 
     <!-- Preferences content summary -->
-    <string name="pref_summary_dim_block">Включает блокировку потемнения</string>
+    <string name="pref_summary_dim_block">Включает блокировку затемнения</string>
     <string name="pref_summary_display_settings">Открывает настройки экрана устройства</string>
 
 </resources>

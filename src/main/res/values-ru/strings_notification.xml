@@ -4,7 +4,7 @@
   -->
 
 <resources>
-    <string name="notification_text">Потемнение заблокировано</string>
+    <string name="notification_text">Затемнение заблокировано</string>
 
     <string name="notification_action_text">Нажмите для разблокирования.</string>
 </resources>

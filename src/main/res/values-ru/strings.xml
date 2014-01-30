@@ -4,7 +4,7 @@
   -->
 
 <resources>
-    <string name="app_name">Блокировка Потемнения</string>
+    <string name="app_name">Блокировка Затемнения</string>
 
     <string name="menu_about">О программе</string>
 
@@ -12,8 +12,8 @@
 
     <string name="menu_share">Поделиться</string>
 
-    <string name="share_text">Скачивайте программу Блокировка Потемнения на https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
+    <string name="share_text">Скачивайте программу Блокировка Затемнения на https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
 
-    <string name="widget_title">Блокировка Потемнения</string>
+    <string name="widget_title">Блокировка Затемнения</string>
 
 </resources>
