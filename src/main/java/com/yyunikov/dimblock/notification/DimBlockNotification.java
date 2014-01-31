@@ -9,6 +9,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+
 import com.yyunikov.dimblock.ui.DimPreferenceActivity;
 
 import com.yyunikov.dimblock.R;
@@ -36,7 +38,11 @@ public class DimBlockNotification {
         nBuilder.setContentText(context.getString(R.string.notification_action_text));
         nBuilder.setSmallIcon(R.drawable.notification_icon);
 
-        return nBuilder.build();
+        if (Build.VERSION.SDK_INT < 16) {
+            return nBuilder.getNotification();
+        } else {
+            return nBuilder.build();
+        }
     }
 
     /**
