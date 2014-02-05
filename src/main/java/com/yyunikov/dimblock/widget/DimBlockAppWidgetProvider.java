@@ -28,13 +28,11 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
 
     private static final int[] IND_DRAWABLE_OFF = {
             R.drawable.appwidget_settings_ind_off_l_holo,
-            R.drawable.appwidget_settings_ind_off_c_holo,
             R.drawable.appwidget_settings_ind_off_r_holo
     };
 
     private static final int[] IND_DRAWABLE_ON = {
             R.drawable.appwidget_settings_ind_on_l_holo,
-            R.drawable.appwidget_settings_ind_on_c_holo,
             R.drawable.appwidget_settings_ind_on_r_holo
     };
 
