@@ -12,4 +12,6 @@
 
     <string name="widget_title">Dim Block</string>
 
+    <string name="widget_single_title">Dim Block Small</string>
+
 </resources>
