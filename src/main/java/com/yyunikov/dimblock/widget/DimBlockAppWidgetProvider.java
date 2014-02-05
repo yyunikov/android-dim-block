@@ -12,7 +12,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.google.analytics.tracking.android.MapBuilder;
 import com.yyunikov.dimblock.R;
+import com.yyunikov.dimblock.base.DimBlockApplication;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
@@ -47,6 +49,9 @@ public class DimBlockAppWidgetProvider extends AppWidgetProvider {
         for (final int appWidgetId : appWidgetIds) {
             appWidgetManager.updateAppWidget(appWidgetId, view);
         }
+        DimBlockApplication.getGaTracker().send(MapBuilder
+                .createEvent("UX", "Widget onUpdate", "Normal size", null)
+                .build());
     }
 
     /**
