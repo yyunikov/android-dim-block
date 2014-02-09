@@ -65,6 +65,7 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
         if (intent.getAction().equals(ACTION_STATE_CHANGE)) {
             final boolean state = getActualState(controller);
             updateWidget(context, !state, controller);
+            DimBlockAppWidgetProvider.updateWidget(context, !state, controller);
         }
     }
 
