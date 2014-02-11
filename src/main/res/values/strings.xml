@@ -4,7 +4,11 @@
 
     <string name="menu_about">About</string>
 
+    <string name="menu_rate_google_play">Rate This App!</string>
+
     <string name="button_ok">OK</string>
+
+    <string name="button_cancel">Cancel</string>
 
     <string name="menu_share">Share</string>
 
@@ -13,5 +17,7 @@
     <string name="widget_title">Dim Block</string>
 
     <string name="widget_single_title">Dim Block Small</string>
+
+    <string name="dialog_rate_google_play">If you do like the app, please rate it on Google Play.</string>
 
 </resources>

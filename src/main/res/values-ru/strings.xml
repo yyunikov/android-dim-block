@@ -8,12 +8,18 @@
 
     <string name="menu_about">О программе</string>
 
+    <string name="menu_rate_google_play">Оценить программу!</string>
+
     <string name="button_ok">OK</string>
+
+    <string name="button_cancel">Отменить</string>
 
     <string name="menu_share">Поделиться</string>
 
     <string name="share_text">Скачивайте программу Блокировка Затемнения на https://play.google.com/store/apps/details?id=com.yyunikov.dimblock</string>
 
     <string name="widget_title">Блокировка Затемнения</string>
+
+    <string name="dialog_rate_google_play">Если вам нравится это приложение, пожалуйста оцените его на Google Play.</string>
 
 </resources>

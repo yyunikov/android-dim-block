@@ -5,8 +5,11 @@
 package com.yyunikov.dimblock.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +62,8 @@ public class DimPreferenceActivity extends Activity {
             final Dialog about = new AboutDialog(this);
 
             about.show();
+        } else if (item.getItemId() == R.id.menu_rate) {
+            createRateDialog().show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -89,5 +94,29 @@ public class DimPreferenceActivity extends Activity {
         adView.loadAd(request);
     }
 
+    private AlertDialog.Builder createRateDialog() {
+        final AlertDialog.Builder rateDialog = new AlertDialog.Builder(this);
+        rateDialog.setTitle(R.string.menu_rate_google_play);
+        rateDialog.setMessage(R.string.dialog_rate_google_play);
+        rateDialog.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialogInterface, final int i) {
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
+        });
 
+        rateDialog.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialogInterface, final int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        return rateDialog;
+    }
 }
