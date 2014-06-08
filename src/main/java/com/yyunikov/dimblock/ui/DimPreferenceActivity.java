@@ -123,4 +123,5 @@ public class DimPreferenceActivity extends Activity {
 
         return rateDialog;
     }
+
 }

@@ -18,10 +18,8 @@ package com.yyunikov.dimblock.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.PowerManager;
 import android.provider.Settings;
-
 import com.yyunikov.dimblock.base.WakeLockManager;
 import com.yyunikov.dimblock.service.DimBlockService;
 
@@ -29,6 +27,8 @@ import com.yyunikov.dimblock.service.DimBlockService;
  * @author yyunikov
  */
 public class DimPreferenceController {
+
+    private static final String DIM_BLOCK_PREFERENCES = "DimBlockPrefs";
 
     /**
      * Context of passed activity.
@@ -39,7 +39,7 @@ public class DimPreferenceController {
 
     public DimPreferenceController(final Context context) {
         this.context = context;
-        this.preferences = context.getSharedPreferences("DimBlockPrefs", Context.MODE_PRIVATE);
+        this.preferences = context.getSharedPreferences(DIM_BLOCK_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     /**
@@ -106,13 +106,4 @@ public class DimPreferenceController {
         return WakeLockManager.getInstance(pm).isLocked();
     }
 
-    /**
-     * Checks if device is connected to WiFi network.
-     *
-     * @return true if connected, false otherwise.
-     */
-    public boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return (cm.getActiveNetworkInfo() != null);
-    }
 }

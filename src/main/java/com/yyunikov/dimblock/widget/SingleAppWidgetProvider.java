@@ -58,12 +58,6 @@ public class SingleAppWidgetProvider extends AppWidgetProvider {
         Analytics.getInstance().sendEvent("UX", "Widget onUpdate", "Small size");
     }
 
-    /**
-     * Receives and processes a button pressed intent or state change.
-     *
-     * @param context context
-     * @param intent  Indicates the pressed button.
-     */
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -126,4 +120,5 @@ public class SingleAppWidgetProvider extends AppWidgetProvider {
         return PendingIntent.getBroadcast(context, 0 /* no requestCode */,
                 launchIntent, 0 /* no flags */);
     }
+
 }

@@ -76,4 +76,5 @@ public class DimBlockNotification {
 
         nm.cancel(NOTIF_ID);
     }
+
 }

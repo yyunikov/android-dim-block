@@ -49,4 +49,5 @@ public class AboutDialog extends Dialog implements View.OnClickListener {
             Logger.error("Can't read package name.", getContext());
         }
     }
+
 }

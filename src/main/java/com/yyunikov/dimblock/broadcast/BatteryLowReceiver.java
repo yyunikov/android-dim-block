@@ -26,6 +26,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
  * @author yyunikov
  */
 public class BatteryLowReceiver extends BroadcastReceiver {
+
     @Override
     public void onReceive(final Context context, final Intent intent) {
         if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BATTERY_LOW)) {
@@ -36,4 +37,5 @@ public class BatteryLowReceiver extends BroadcastReceiver {
             }
         }
     }
+
 }

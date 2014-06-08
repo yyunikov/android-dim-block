@@ -123,4 +123,5 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             ((SwitchPreference) findPreference(dimBlockEnabledKey)).setChecked(true);
         }
     }
+
 }
