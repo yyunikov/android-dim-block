@@ -28,27 +28,35 @@ public class Admob {
     private static InterstitialAd sInterstitialAd;
 
     public static void initAd(final Context context) {
-        // Create the interstitial.
-        sInterstitialAd = new InterstitialAd(context);
-        sInterstitialAd.setAdUnitId(Model.getInstance().getConfiguration().getAdmobId());
+        if (isAbmobEnabled()) {
+            // Create the interstitial.
+            sInterstitialAd = new InterstitialAd(context);
+            sInterstitialAd.setAdUnitId(Model.getInstance().getConfiguration().getAdmobId());
 
-        // Create ad request.
-        final AdRequest adRequest = new AdRequest.Builder().build();
+            // Create ad request.
+            final AdRequest adRequest = new AdRequest.Builder().build();
 
-        // Begin loading your interstitial.
-        sInterstitialAd.loadAd(adRequest);
+            // Begin loading your interstitial.
+            sInterstitialAd.loadAd(adRequest);
 
-        sInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                displayInterstitial();
-            }
-        });
+            sInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    displayInterstitial();
+                }
+            });
+        }
     }
 
     public static void displayInterstitial() {
-        if (sInterstitialAd.isLoaded()) {
-            sInterstitialAd.show();
+        if (isAbmobEnabled()) {
+            if (sInterstitialAd.isLoaded()) {
+                sInterstitialAd.show();
+            }
         }
+    }
+
+    private static boolean isAbmobEnabled() {
+        return Model.getInstance().getConfiguration().isAdmobEnabled();
     }
 }

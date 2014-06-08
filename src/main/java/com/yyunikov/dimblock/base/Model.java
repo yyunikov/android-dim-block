@@ -16,7 +16,7 @@
 package com.yyunikov.dimblock.base;
 
 /**
- * Model class, that contains configurations and data that can be accessed in all application.
+ * Model class, that contains configurations and data that can be accessed all across the application.
  *
  * @author yyunikov
  */
