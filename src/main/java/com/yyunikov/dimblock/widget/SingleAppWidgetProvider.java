@@ -32,7 +32,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
  */
 public class SingleAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
-            new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.DimBlockSingleAppWidgetProvider");
+            new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.SingleAppWidgetProvider");
 
     private static final String ACTION_STATE_CHANGE = "com.yyunikov.dimblock.DimBlockStateChange";
 
@@ -91,7 +91,7 @@ public class SingleAppWidgetProvider extends AppWidgetProvider {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
             controller.setDimEnabled(true);
             views.setImageViewResource(R.id.img_dim_block, R.drawable.icon_enabled);
-        } else {
+        } else if (!state) {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_OFF[0]);
             controller.setDimEnabled(false);
             views.setImageViewResource(R.id.img_dim_block, R.drawable.icon_disabled);
