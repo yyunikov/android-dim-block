@@ -13,6 +13,7 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.DimBlockApplication;
 import com.yyunikov.dimblock.base.Logger;
+import com.yyunikov.dimblock.controller.AdController;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 import com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider;
 import com.yyunikov.dimblock.widget.DimBlockSingleAppWidgetProvider;
@@ -36,13 +37,13 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_activity_dim);
         initialize();
+        AdController.initAd(getActivity());
     }
 
     @Override
     public void onResume() {
         super.onResume();
         ensureDimOff();
-        displayAdOnNetworkConnected();
     }
 
     @Override
@@ -103,30 +104,6 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             findPreference(unBlockOnBatteryLowKey).setOnPreferenceChangeListener(this);
         } else {
             Logger.error("Error: No preference key specified.", getActivity());
-        }
-    }
-
-    /**
-     * Hides or shows ad preference on network connected or disconnected.
-     */
-    private void displayAdOnNetworkConnected(){
-        final String preferenceKey = getString(R.string.key_pref_ad_pref);
-
-        if (preferenceKey == null) {
-            Logger.error("Error: No ad preference key specified.", getActivity());
-            return;
-        }
-
-        if (!dimPreferenceController.isNetworkConnected() && getPreferenceScreen().findPreference(preferenceKey) != null) {
-            getPreferenceScreen().removePreference(findPreference(preferenceKey));
-        } else if (dimPreferenceController.isNetworkConnected() && getPreferenceScreen().findPreference(preferenceKey) == null) {
-            // adding ad preference to preference screen
-            final AdPreference adPreference = new AdPreference(getActivity());
-            adPreference.setLayoutResource(R.layout.ad_layout);
-            adPreference.setKey(preferenceKey);
-            getPreferenceScreen().addPreference(adPreference);
-        } else {
-            Logger.error("Unexpected exception with removing/adding ad.", getActivity());
         }
     }
 

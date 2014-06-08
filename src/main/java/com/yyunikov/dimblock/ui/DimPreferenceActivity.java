@@ -15,9 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.yyunikov.dimblock.R;
 import com.yyunikov.dimblock.base.Logger;
 
@@ -81,17 +78,6 @@ public class DimPreferenceActivity extends Activity {
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
         return intent;
-    }
-
-    /**
-     * Loads ad's from Admob
-     */
-    private void loadAd() {
-        final AdView adView = (AdView) findViewById(R.id.adView);
-        final AdRequest request = new AdRequest.Builder().
-                addTestDevice(AdRequest.DEVICE_ID_EMULATOR).
-                build();
-        adView.loadAd(request);
     }
 
     private AlertDialog.Builder createRateDialog() {
