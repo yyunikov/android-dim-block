@@ -24,7 +24,7 @@ import com.yyunikov.dimblock.notification.DimBlockNotification;
 /**
  * @author yyunikov
  */
-public class DimBlockService extends Service{
+public class DimBlockService extends Service {
 
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {

@@ -135,5 +135,6 @@ public class SingleAppWidgetProvider extends AppWidgetProvider {
         // Update specific list of appWidgetIds if given, otherwise default to all
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(THIS_APPWIDGET, views);
+        // TODO move code to abstract parent class and use public THIS_APPWIDGET to update classes
     }
 }

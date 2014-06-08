@@ -28,7 +28,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
 public class BatteryLowReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        if (intent.getAction().equalsIgnoreCase("android.intent.action.BATTERY_LOW")) {
+        if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BATTERY_LOW)) {
             final DimPreferenceController controller = new DimPreferenceController(context);
 
             if (controller.getBooleanPreference(context.getString(R.string.key_pref_unblock_battery))) {

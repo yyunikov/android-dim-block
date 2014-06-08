@@ -25,15 +25,14 @@ import android.os.PowerManager;
  */
 public class WakeLockManager {
 
-    private static WakeLockManager instance;
+    private static WakeLockManager sInstance;
 
     private static PowerManager.WakeLock wakeLock;
 
     /**
      * Private constructor.
      */
-    private WakeLockManager() {
-    }
+    private WakeLockManager() {}
 
     /**
      * Gets singleton instance of WakeLockManager.
@@ -42,11 +41,11 @@ public class WakeLockManager {
      * @return WakeLockManager instance
      */
     public static synchronized WakeLockManager getInstance(final PowerManager powerManager) {
-        if (instance == null) {
-            instance = new WakeLockManager();
+        if (sInstance == null) {
+            sInstance = new WakeLockManager();
             wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "Dim Block");
         }
-        return instance;
+        return sInstance;
     }
 
     /**

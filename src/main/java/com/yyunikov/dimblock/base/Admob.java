@@ -25,20 +25,20 @@ import com.google.android.gms.ads.InterstitialAd;
  */
 public class Admob {
 
-    private static InterstitialAd interstitialAd;
+    private static InterstitialAd sInterstitialAd;
 
     public static void initAd(final Context context) {
         // Create the interstitial.
-        interstitialAd = new InterstitialAd(context);
-        interstitialAd.setAdUnitId(Model.getInstance().getConfiguration().getAdmobId());
+        sInterstitialAd = new InterstitialAd(context);
+        sInterstitialAd.setAdUnitId(Model.getInstance().getConfiguration().getAdmobId());
 
         // Create ad request.
         final AdRequest adRequest = new AdRequest.Builder().build();
 
         // Begin loading your interstitial.
-        interstitialAd.loadAd(adRequest);
+        sInterstitialAd.loadAd(adRequest);
 
-        interstitialAd.setAdListener(new AdListener() {
+        sInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 displayInterstitial();
@@ -47,8 +47,8 @@ public class Admob {
     }
 
     public static void displayInterstitial() {
-        if (interstitialAd.isLoaded()) {
-            interstitialAd.show();
+        if (sInterstitialAd.isLoaded()) {
+            sInterstitialAd.show();
         }
     }
 }

@@ -35,7 +35,6 @@ public class AboutDialog extends Dialog implements View.OnClickListener {
         setAppVersion();
     }
 
-
     @Override
     public void onClick(final View view) {
         dismiss();

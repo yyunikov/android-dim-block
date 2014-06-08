@@ -76,7 +76,6 @@ public class DimPreferenceActivity extends Activity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == R.id.menu_about) {
             final Dialog about = new AboutDialog(this);
-
             about.show();
         } else if (item.getItemId() == R.id.menu_rate) {
             createRateDialog().show();

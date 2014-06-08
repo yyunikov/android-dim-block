@@ -22,14 +22,15 @@ package com.yyunikov.dimblock.base;
  */
 public class Model {
 
+    private static final String CONFIG_FILE = "config.properties";
+
     private static volatile Model mInstance;
 
     private static DimBlockApplication mApplicationContext;
 
     private Config mConfig;
 
-    private Model() {
-    }
+    private Model() {}
 
     public static Model getInstance() {
         if (mInstance == null) {
@@ -41,7 +42,7 @@ public class Model {
     public void initialize(final DimBlockApplication applicationContext) {
         mApplicationContext = applicationContext;
 
-        mConfig = new Config(applicationContext, new String[]{"config.properties"});
+        mConfig = new Config(applicationContext, new String[]{CONFIG_FILE});
     }
 
     public DimBlockApplication getApplication() {

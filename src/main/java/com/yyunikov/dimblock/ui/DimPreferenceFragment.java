@@ -29,14 +29,9 @@ import com.yyunikov.dimblock.widget.SingleAppWidgetProvider;
 
 /**
  * @author yyunikov
- *
- * This fragment shows the preferences for dim block.
  */
 public class DimPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
-    /**
-     * Dim preference controller object.
-     */
     private DimPreferenceController dimPreferenceController;
 
     @Override
@@ -92,9 +87,6 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         return true;
     }
 
-    /**
-     * Fragment initialization.
-     */
     private void initialize() {
         dimPreferenceController = new DimPreferenceController(getActivity());
 
@@ -107,7 +99,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             findPreference(dimBlockEnabledKey).setOnPreferenceChangeListener(this);
             findPreference(unBlockOnBatteryLowKey).setOnPreferenceChangeListener(this);
         } else {
-            Logger.error("Error: No preference key specified.", getActivity());
+            Logger.error("No preference key specified.", getActivity());
         }
     }
 
