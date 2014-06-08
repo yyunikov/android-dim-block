@@ -26,7 +26,7 @@
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 
         <service android:name=".service.DimBlockService"
-                android:process="com.yyunikov.dimblock.service"/>
+                android:process=":dimblockservice"/>
 
         <receiver android:name=".broadcast.BatteryLowReceiver">
             <intent-filter>
