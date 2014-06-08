@@ -6,7 +6,7 @@
 
 <resources>
     <string name="about_title">О программе</string>
-    <string name="about_version">Версия 1.0.0</string>
+    <string name="about_version">Версия</string>
     <string name="about_author">© 2014 Юрий Юников</string>
     <string name="about_icon_author">Автор иконки Udana Ekanayake (www.ekanayake.me). Изменений не было сделано.</string>
 </resources>

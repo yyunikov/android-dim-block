@@ -32,7 +32,7 @@ public class AboutDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.dialog_about);
 
         findViewById(R.id.about_button_ok).setOnClickListener(this);
-        setAppVersion();
+        setAppVersion(context);
     }
 
     @Override
@@ -40,10 +40,11 @@ public class AboutDialog extends Dialog implements View.OnClickListener {
         dismiss();
     }
 
-    public void setAppVersion() {
+    public void setAppVersion(final Context context) {
         try {
             final String appVersion = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0).versionName;
-            ((TextView)findViewById(R.id.tv_about_version)).setText("Version " + appVersion);
+            ((TextView)findViewById(R.id.tv_about_version)).setText(context.getString(R.string.about_version)
+                    + " " + appVersion);
         } catch (PackageManager.NameNotFoundException e) {
             Logger.error("Can't read package name.", getContext());
         }
