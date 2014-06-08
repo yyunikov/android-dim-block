@@ -24,8 +24,8 @@ import com.yyunikov.dimblock.base.Analytics;
 import com.yyunikov.dimblock.base.Logger;
 import com.yyunikov.dimblock.base.Admob;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
-import com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider;
-import com.yyunikov.dimblock.widget.DimBlockSingleAppWidgetProvider;
+import com.yyunikov.dimblock.widget.DoubleAppWidgetProvider;
+import com.yyunikov.dimblock.widget.SingleAppWidgetProvider;
 
 /**
  * @author yyunikov
@@ -72,8 +72,8 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         // If dim enabled preference clicked
         if (preferenceKey != null && preferenceKey.equals(getString(R.string.key_pref_dim_block_enabled))) {
             changeDimPreference((Boolean) o);
-            DimBlockAppWidgetProvider.updateWidget(getActivity(), (Boolean) o, dimPreferenceController);
-            DimBlockSingleAppWidgetProvider.updateWidget(getActivity(), (Boolean) o, dimPreferenceController);
+            DoubleAppWidgetProvider.updateWidget(getActivity(), (Boolean) o, dimPreferenceController);
+            SingleAppWidgetProvider.updateWidget(getActivity(), (Boolean) o, dimPreferenceController);
         }
 
         // If disable on battery low preference clicked

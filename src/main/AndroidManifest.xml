@@ -29,14 +29,14 @@
                 <action android:name="android.intent.action.BATTERY_LOW"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".widget.DimBlockAppWidgetProvider" android:label="@string/widget_title">
+        <receiver android:name=".widget.DoubleAppWidgetProvider" android:label="@string/widget_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/dim_block_widget_info" />
         </receiver>
 
-        <receiver android:name=".widget.DimBlockSingleAppWidgetProvider" android:label="@string/widget_single_title">
+        <receiver android:name=".widget.SingleAppWidgetProvider" android:label="@string/widget_single_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

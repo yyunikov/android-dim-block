@@ -29,18 +29,21 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
 /**
  * @author yyunikov
  */
-public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
+public class DoubleAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
-            new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.DimBlockSingleAppWidgetProvider");
+            new ComponentName("com.yyunikov.dimblock","com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider");
 
     private static final String ACTION_STATE_CHANGE = "com.yyunikov.dimblock.DimBlockStateChange";
+    private static final String ACTION_SETTINGS_OPEN = "com.yyunikov.dimblock.DimBlockSettingsOpen";
 
     private static final int[] IND_DRAWABLE_OFF = {
-            R.drawable.appwidget_settings_ind_off_c_holo,
+            R.drawable.appwidget_settings_ind_off_l_holo,
+            R.drawable.appwidget_settings_ind_off_r_holo
     };
 
     private static final int[] IND_DRAWABLE_ON = {
-            R.drawable.appwidget_settings_ind_on_c_holo,
+            R.drawable.appwidget_settings_ind_on_l_holo,
+            R.drawable.appwidget_settings_ind_on_r_holo
     };
 
     @Override
@@ -55,7 +58,7 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(appWidgetId, view);
         }
 
-        Analytics.getInstance().sendEvent("UX", "Widget onUpdate", "Small size");
+        Analytics.getInstance().sendEvent("UX", "Widget onUpdate", "Normal size");
     }
 
     /**
@@ -71,20 +74,24 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
         if (intent.getAction().equals(ACTION_STATE_CHANGE)) {
             final boolean state = getActualState(controller);
             updateWidget(context, !state, controller);
-            DimBlockAppWidgetProvider.updateWidget(context, !state, controller);
+            SingleAppWidgetProvider.updateWidget(context, !state, controller);
+        }
+        if (intent.getAction().equals(ACTION_SETTINGS_OPEN)) {
+            controller.openDisplaySettings();
         }
     }
 
     /**
-     * Load image for given widget and build {@link android.widget.RemoteViews} for it.
+     * Load image for given widget and build {@link RemoteViews} for it.
      *
      * @param context context
      * @param state state of dim block
      */
     private static RemoteViews buildUpdate(final Context context, final boolean state, final DimPreferenceController controller) {
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single);
+        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         views.setOnClickPendingIntent(R.id.btn_dim_block, getLaunchPendingIntent(context, R.id.btn_dim_block));
+        views.setOnClickPendingIntent(R.id.btn_settings, getLaunchPendingIntent(context, R.id.btn_settings));
 
         if (state) {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
@@ -95,6 +102,8 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
             controller.setDimEnabled(false);
             views.setImageViewResource(R.id.img_dim_block, R.drawable.icon_disabled);
         }
+
+        views.setImageViewResource(R.id.img_settings, R.drawable.ic_action_settings);
 
         return views;
     }
@@ -116,11 +125,15 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
      */
     private static PendingIntent getLaunchPendingIntent(final Context context, final int buttonId) {
         final Intent launchIntent = new Intent();
-        launchIntent.setClass(context, DimBlockSingleAppWidgetProvider.class);
+        launchIntent.setClass(context, DoubleAppWidgetProvider.class);
 
         switch (buttonId) {
             case R.id.btn_dim_block:
                 launchIntent.setAction(ACTION_STATE_CHANGE);
+                break;
+            case R.id.btn_settings:
+                launchIntent.setAction(ACTION_SETTINGS_OPEN);
+                launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
         }
 
