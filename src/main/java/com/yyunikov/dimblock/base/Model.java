@@ -41,8 +41,6 @@ public class Model {
     public void initialize(final DimBlockApplication applicationContext) {
         mApplicationContext = applicationContext;
 
-        Analytics.getInstance().initTracker();
-
         mConfig = new Config(applicationContext, new String[]{"config.properties"});
     }
 

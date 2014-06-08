@@ -27,6 +27,7 @@ public class DimBlockApplication extends Application {
         super.onCreate();
 
         Model.getInstance().initialize(this);
+        Analytics.getInstance().initTracker();
     }
 
 }
