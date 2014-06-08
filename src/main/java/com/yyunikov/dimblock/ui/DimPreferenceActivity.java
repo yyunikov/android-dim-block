@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 import com.yyunikov.dimblock.R;
+import com.yyunikov.dimblock.base.Analytics;
 import com.yyunikov.dimblock.base.Logger;
 
 /**
@@ -57,6 +58,18 @@ public class DimPreferenceActivity extends Activity {
         }
 
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Analytics.getInstance().reportActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Analytics.getInstance().reportActivityStop(this);
     }
 
     @Override

@@ -15,9 +15,6 @@
  */
 package com.yyunikov.dimblock.base;
 
-import com.google.analytics.tracking.android.GoogleAnalytics;
-import com.google.analytics.tracking.android.Tracker;
-
 /**
  * Model class, that contains configurations and data that can be accessed in all application.
  *
@@ -28,12 +25,6 @@ public class Model {
     private static volatile Model mInstance;
 
     private static DimBlockApplication mApplicationContext;
-
-    private static final String GA_TRACKING_ID = "UA-41878921-2";
-
-    private GoogleAnalytics mGa;
-
-    private Tracker mTracker;
 
     private Config mConfig;
 
@@ -50,12 +41,9 @@ public class Model {
     public void initialize(final DimBlockApplication applicationContext) {
         mApplicationContext = applicationContext;
 
-        mGa = GoogleAnalytics.getInstance(applicationContext);
-        mTracker = mGa.getTracker(GA_TRACKING_ID);
+        Analytics.getInstance().initTracker();
 
         mConfig = new Config(applicationContext, new String[]{"config.properties"});
-
-        mGa.setDryRun(!mConfig.isAnalyticsEnabled());
     }
 
     public DimBlockApplication getApplication() {
@@ -64,12 +52,5 @@ public class Model {
 
     public Config getConfiguration() {
         return mConfig;
-    }
-
-    /**
-     * Returns the Google Analytics tracker.
-     */
-    public Tracker getGaTracker() {
-        return mTracker;
     }
 }

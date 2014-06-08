@@ -19,11 +19,10 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import com.google.analytics.tracking.android.MapBuilder;
 import com.yyunikov.dimblock.R;
+import com.yyunikov.dimblock.base.Analytics;
 import com.yyunikov.dimblock.base.Logger;
-import com.yyunikov.dimblock.base.Model;
-import com.yyunikov.dimblock.controller.AdController;
+import com.yyunikov.dimblock.base.Admob;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 import com.yyunikov.dimblock.widget.DimBlockAppWidgetProvider;
 import com.yyunikov.dimblock.widget.DimBlockSingleAppWidgetProvider;
@@ -46,7 +45,7 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preference_activity_dim);
         initialize();
-        AdController.initAd(getActivity());
+        Admob.initAd(getActivity());
     }
 
     @Override
@@ -82,15 +81,11 @@ public class DimPreferenceFragment extends PreferenceFragment implements Prefere
             if (o.equals(Boolean.TRUE)) {
                 dimPreferenceController.setBooleanPreference(preferenceKey, true);
                 // send zero value if unblock if battery is low gets checked
-                Model.getInstance().getGaTracker().send(MapBuilder
-                        .createEvent("UX", "Unblock if battery is low checked", "Unblock if battery is low", null)
-                        .build());
+                Analytics.getInstance().sendEvent("UX", "Unblock if battery is low checked", "Unblock if battery is low");
             } else {
                 dimPreferenceController.setBooleanPreference(preferenceKey, false);
                 // send zero value if unblock if battery is low gets unchecked
-                Model.getInstance().getGaTracker().send(MapBuilder
-                        .createEvent("UX", "Unblock if battery is low unchecked", "Unblock if battery is low", null)
-                        .build());
+                Analytics.getInstance().sendEvent("UX", "Unblock if battery is low unchecked", "Unblock if battery is low");
             }
         }
 

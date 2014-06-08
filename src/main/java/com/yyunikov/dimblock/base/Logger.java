@@ -18,8 +18,6 @@ package com.yyunikov.dimblock.base;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.analytics.tracking.android.MapBuilder;
-
 /**
  * @author yyunikov
  */
@@ -39,7 +37,7 @@ public class Logger {
         Log.e(LOG_TAG, text);
 
         if (context != null) {
-            Model.getInstance().getGaTracker().send(MapBuilder.createException(text, false).build());
+            Analytics.getInstance().sendException(context, new Exception(text));
         }
     }
 
@@ -47,7 +45,7 @@ public class Logger {
         Log.e(LOG_TAG, text);
 
         if (context != null) {
-            Model.getInstance().getGaTracker().send(MapBuilder.createException(text, false).build());
+            Analytics.getInstance().sendException(context, e);
         }
     }
 }

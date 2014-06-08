@@ -22,9 +22,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
-import com.google.analytics.tracking.android.MapBuilder;
 import com.yyunikov.dimblock.R;
-import com.yyunikov.dimblock.base.Model;
+import com.yyunikov.dimblock.base.Analytics;
 import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
@@ -56,9 +55,7 @@ public class DimBlockSingleAppWidgetProvider extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(appWidgetId, view);
         }
 
-        Model.getInstance().getGaTracker().send(MapBuilder
-                .createEvent("UX", "Widget onUpdate", "Small size", null)
-                .build());
+        Analytics.getInstance().sendEvent("UX", "Widget onUpdate", "Small size");
     }
 
     /**
