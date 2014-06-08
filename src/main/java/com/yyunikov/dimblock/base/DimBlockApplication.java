@@ -1,13 +1,21 @@
 /*
- * Copyright (c) 2014 Yuriy Yunikov
+ * Copyright 2014 Yuriy Yunikov
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package com.yyunikov.dimblock.base;
 
 import android.app.Application;
-
-import com.google.analytics.tracking.android.GoogleAnalytics;
-import com.google.analytics.tracking.android.Tracker;
 
 /**
  * Author: yyunikov
@@ -15,39 +23,11 @@ import com.google.analytics.tracking.android.Tracker;
  */
 public class DimBlockApplication extends Application {
 
-    private static final String GA_TRACKING_ID = "UA-41878921-2";
-
-    private static GoogleAnalytics mGa;
-    private static Tracker mTracker;
-    private static Config mConfig;
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mGa = GoogleAnalytics.getInstance(this);
-        mTracker = mGa.getTracker(GA_TRACKING_ID);
-        mConfig = new Config(this, new String[]{ "config.properties" });
-
-        mGa.setDryRun(!mConfig.isAnalyticsEnabled());
-        //mGa.getLogger().setLogLevel(com.google.analytics.tracking.android.Logger.LogLevel.VERBOSE);
+        Model.getInstance().initialize(this);
     }
 
-    /*
-    * Returns the Google Analytics tracker.
-    */
-    public static Tracker getGaTracker() {
-        return mTracker;
-    }
-
-    /*
-    * Returns the Google Analytics instance.
-    */
-    public static GoogleAnalytics getGaInstance() {
-        return mGa;
-    }
-
-    public static Config getConfig() {
-        return mConfig;
-    }
 }
