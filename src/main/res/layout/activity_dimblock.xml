@@ -11,15 +11,6 @@
         <FrameLayout
             android:id="@+id/fragment"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@+id/adView"/>
+            android:layout_height="fill_parent"/>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-7711340491385512/5513673383"
-            android:gravity="bottom" />
 </RelativeLayout>

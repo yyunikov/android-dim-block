@@ -31,11 +31,11 @@ public class Model {
 
     private static final String GA_TRACKING_ID = "UA-41878921-2";
 
-    private static GoogleAnalytics mGa;
+    private GoogleAnalytics mGa;
 
-    private static Tracker mTracker;
+    private Tracker mTracker;
 
-    private static Config mConfig;
+    private Config mConfig;
 
     private Model() {
     }
@@ -69,7 +69,7 @@ public class Model {
     /**
      * Returns the Google Analytics tracker.
      */
-    public static Tracker getGaTracker() {
+    public Tracker getGaTracker() {
         return mTracker;
     }
 }

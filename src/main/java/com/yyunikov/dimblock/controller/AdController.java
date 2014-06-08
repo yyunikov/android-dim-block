@@ -19,7 +19,7 @@ import android.content.Context;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.yyunikov.dimblock.base.DimBlockApplication;
+import com.yyunikov.dimblock.base.Model;
 
 /**
  * @author yyunikov
@@ -31,10 +31,10 @@ public class AdController {
     public static void initAd(final Context context) {
         // Create the interstitial.
         interstitialAd = new InterstitialAd(context);
-        interstitialAd.setAdUnitId(DimBlockApplication.getConfig().getAdmobId());
+        interstitialAd.setAdUnitId(Model.getInstance().getConfiguration().getAdmobId());
 
         // Create ad request.
-        AdRequest adRequest = new AdRequest.Builder().build();
+        final AdRequest adRequest = new AdRequest.Builder().build();
 
         // Begin loading your interstitial.
         interstitialAd.loadAd(adRequest);

@@ -18,8 +18,7 @@ package com.yyunikov.dimblock.base;
 import android.app.Application;
 
 /**
- * Author: yyunikov
- * Date: 1/27/14
+ * @author yyunikov
  */
 public class DimBlockApplication extends Application {
 

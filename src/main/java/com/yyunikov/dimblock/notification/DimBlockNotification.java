@@ -1,7 +1,18 @@
 /*
- * Copyright (c) 2014 Yuriy Yunikov
+ * Copyright 2014 Yuriy Yunikov
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package com.yyunikov.dimblock.notification;
 
 import android.app.Notification;
@@ -16,11 +27,10 @@ import com.yyunikov.dimblock.ui.DimPreferenceActivity;
 import com.yyunikov.dimblock.R;
 
 /**
- * Author: yyunikov
- * Date: 12/27/13
+ * @author yyunikov
  */
 public class DimBlockNotification {
-    final private static int notifId = 812345;
+    private static final int NOTIF_ID = 812345;
 
     /**
      * Gets dim block status bar notification.
@@ -50,7 +60,7 @@ public class DimBlockNotification {
      * @return notification id
      */
     public static int getId() {
-        return notifId;
+        return NOTIF_ID;
     }
 
     /**
@@ -61,6 +71,6 @@ public class DimBlockNotification {
         NotificationManager nm =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        nm.cancel(notifId);
+        nm.cancel(NOTIF_ID);
     }
 }
