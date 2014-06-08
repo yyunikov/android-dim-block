@@ -30,6 +30,7 @@ import com.yyunikov.dimblock.R;
  * @author yyunikov
  */
 public class DimBlockNotification {
+
     private static final int NOTIF_ID = 812345;
 
     /**
@@ -57,6 +58,7 @@ public class DimBlockNotification {
 
     /**
      * Gets id of notification.
+     *
      * @return notification id
      */
     public static int getId() {
@@ -65,10 +67,11 @@ public class DimBlockNotification {
 
     /**
      * Cancels dim block notification.
+     *
      * @param context application context
      */
     public static void cancel(final Context context) {
-        NotificationManager nm =
+        final NotificationManager nm =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         nm.cancel(NOTIF_ID);

@@ -28,6 +28,12 @@ import java.util.Properties;
  */
 public class Config {
 
+    private static final String ADMOB_ENABLED = "google.admob.enabled";
+
+    private static final String ANALYTICS_ENABLED = "google.analytics.enabled";
+
+    private static final String ADMOB_UNIT_ID = "google.admob.unitId";
+
 	private Context mContext;
 	
 	private Properties mConfig;
@@ -61,14 +67,14 @@ public class Config {
 	}
 	
 	public boolean isAdmobEnabled() {
-		return Boolean.valueOf(mConfig.getProperty("google.admob.enabled"));
+		return Boolean.valueOf(mConfig.getProperty(ADMOB_ENABLED));
 	}
 	
 	public boolean isAnalyticsEnabled() {
-		return Boolean.valueOf(mConfig.getProperty("google.analytics.enabled"));
+		return Boolean.valueOf(mConfig.getProperty(ANALYTICS_ENABLED));
 	}
 	
 	public String getAdmobId() {
-		return mConfig.getProperty("google.admob.unitId");
+		return mConfig.getProperty(ADMOB_UNIT_ID);
 	}
 }
