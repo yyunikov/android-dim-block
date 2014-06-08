@@ -20,15 +20,20 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity>                                                             \
+
         <activity android:name="com.google.android.gms.ads.AdActivity"
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-        <service android:name=".service.DimBlockService"/>
+
+        <service android:name=".service.DimBlockService"
+                android:process="com.yyunikov.dimblock.service"/>
+
         <receiver android:name=".broadcast.BatteryLowReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LOW"/>
             </intent-filter>
         </receiver>
+
         <receiver android:name=".widget.DoubleAppWidgetProvider" android:label="@string/widget_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -42,5 +47,6 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/dim_block_single_widget_info" />
         </receiver>
+
     </application>
 </manifest>
