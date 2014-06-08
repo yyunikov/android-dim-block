@@ -49,7 +49,10 @@ android {
 
     signingConfigs {
         release {
-
+            storeFile file(DB_RELEASE_STORE_FILE)
+            storePassword DB_RELEASE_STORE_PASSWORD
+            keyAlias DB_RELEASE_KEY_ALIAS
+            keyPassword DB_RELEASE_KEY_PASSWORD
         }
     }
 
