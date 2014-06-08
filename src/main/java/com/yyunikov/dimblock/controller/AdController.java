@@ -19,20 +19,19 @@ import android.content.Context;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.yyunikov.dimblock.base.DimBlockApplication;
 
 /**
  * @author yyunikov
  */
 public class AdController {
 
-    private static final String AD_UNIT_ID = "ca-app-pub-7711340491385512/2635426581";
-
     private static InterstitialAd interstitialAd;
 
     public static void initAd(final Context context) {
         // Create the interstitial.
         interstitialAd = new InterstitialAd(context);
-        interstitialAd.setAdUnitId(AD_UNIT_ID);
+        interstitialAd.setAdUnitId(DimBlockApplication.getConfig().getAdmobId());
 
         // Create ad request.
         AdRequest adRequest = new AdRequest.Builder().build();
