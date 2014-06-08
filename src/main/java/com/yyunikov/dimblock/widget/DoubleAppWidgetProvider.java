@@ -28,6 +28,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
  * @author yyunikov
+ * TODO simplify code duplication for widget classes
  */
 public class DoubleAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
@@ -97,7 +98,7 @@ public class DoubleAppWidgetProvider extends AppWidgetProvider {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_ON[0]);
             controller.setDimEnabled(true);
             views.setImageViewResource(R.id.img_dim_block, R.drawable.icon_enabled);
-        } else if (!state) {
+        } else {
             views.setImageViewResource(R.id.ind_dim_block, IND_DRAWABLE_OFF[0]);
             controller.setDimEnabled(false);
             views.setImageViewResource(R.id.img_dim_block, R.drawable.icon_disabled);
@@ -119,9 +120,6 @@ public class DoubleAppWidgetProvider extends AppWidgetProvider {
 
     /**
      * Creates PendingIntent to notify the widget of a button click.
-     *
-     * @param context
-     * @return
      */
     private static PendingIntent getLaunchPendingIntent(final Context context, final int buttonId) {
         final Intent launchIntent = new Intent();
@@ -137,15 +135,12 @@ public class DoubleAppWidgetProvider extends AppWidgetProvider {
                 break;
         }
 
-        final PendingIntent pi = PendingIntent.getBroadcast(context, 0 /* no requestCode */,
+        return PendingIntent.getBroadcast(context, 0 /* no requestCode */,
                 launchIntent, 0 /* no flags */);
-        return pi;
     }
 
     /**
      * Updates the widget when something changes, or when a button is pushed.
-     *
-     * @param context
      */
     public static void updateWidget(final Context context, final boolean state, final DimPreferenceController controller) {
         final RemoteViews views = buildUpdate(context, state ,controller);

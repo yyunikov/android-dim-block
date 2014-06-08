@@ -28,6 +28,7 @@ import com.yyunikov.dimblock.controller.DimPreferenceController;
 
 /**
  * @author yyunikov
+ * TODO simplify code duplication for widget classes
  */
 public class SingleAppWidgetProvider extends AppWidgetProvider {
     private static final ComponentName THIS_APPWIDGET =
