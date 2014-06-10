@@ -1,7 +1,7 @@
 DimBlock
 ========
 
-Simple application that easily block's dim on Android devices.
+Simple application that block's dim on Android devices.
 
 License
 =================
