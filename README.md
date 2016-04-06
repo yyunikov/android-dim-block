@@ -5,7 +5,7 @@ Simple application for blocking dim on Android devices.
 
 <a href="https://play.google.com/store/apps/details?id=com.yyunikov.dimblock" target="_blank">
   <img alt="Android app on Google Play"
-       src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" />
+       src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" width="185" height="60" />
 </a>
 
 License
