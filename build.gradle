@@ -3,32 +3,33 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath 'com.android.tools.build:gradle:2.1.2'
     }
 }
 
-apply plugin: 'android'
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.application'
 
 dependencies {
-    compile 'com.google.android.gms:play-services:4.3.23'
+    compile 'com.google.android.gms:play-services-analytics:9.2.0'
+    compile 'com.google.android.gms:play-services-ads:9.2.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
-        versionCode 7
-        versionName '1.0.5'
+        versionCode 8
+        versionName '1.0.6'
         minSdkVersion 14
-        targetSdkVersion 19
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
+        targetSdkVersion 24
     }
 
     sourceSets {
@@ -70,5 +71,5 @@ android {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '2.4'
 }

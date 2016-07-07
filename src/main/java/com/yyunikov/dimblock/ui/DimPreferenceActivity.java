@@ -22,6 +22,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ActionProvider;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,7 +36,7 @@ import com.yyunikov.dimblock.base.Logger;
 /**
  * @author yyunikov
  */
-public class DimPreferenceActivity extends Activity {
+public class DimPreferenceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class DimPreferenceActivity extends Activity {
         final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_dim_preference, menu);
 
-        final ShareActionProvider mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.menu_item_share).getActionProvider();
+        final android.support.v7.widget.ShareActionProvider mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_item_share));
 
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(getDefaultShareIntent());
